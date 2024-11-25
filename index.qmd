@@ -1,11 +1,8 @@
 ---
-title: "testing_qmd"
+title: "Index"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
 ```{r}
+"Index page"
 1 + 1
 ```
