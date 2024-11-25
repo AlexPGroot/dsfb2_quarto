@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Data science portfolio"
+  title: "AlexPGroot"
   sidebar:
     contents: /*
   navbar:
@@ -10,10 +10,34 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-
+  site-url: https://alexpgroot.github.io/
+  page-footer: 
+    left: "Copyright 2024, Alex Groot" 
+    right: 
+      - icon: github
+        href: https://github.com/AlexPGroot/AlexPGroot.github.io
 format:
   html:
+    grid:
+      sidebar-width: 250px
+      body-width: 900px
+      margin-width: 250px
+      gutter-width: 1.5rem
+    code-links:
+      - text: Github
+        icon: github
+        href: https://github.com/AlexPGroot/AlexPGroot.github.io
     theme: 
       light: united
     css: styles.css
     toc: true
+    
+include-in-header:
+  - text: |
+      <style>
+      /* tabset format and border removal */
+      .panel-tabset > .nav-tabs,
+      .panel-tabset > .tab-content {
+        border: none;
+      }
+      </style>
