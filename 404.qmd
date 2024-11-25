@@ -1,0 +1,16 @@
+---
+title: "Page Not Found"
+format:
+  html:
+    toc: false
+---
+
+ <style>
+body {
+  background-image: url('https://deep-image.ai/blog/content/images/2024/04/404-base.png');
+  background-repeat: repeat;
+}
+</style> 
+
+<br>
+Return to <a href="https://alexpgroot.github.io/index.html"> Index </a>
