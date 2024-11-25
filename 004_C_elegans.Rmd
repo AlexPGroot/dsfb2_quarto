@@ -1,0 +1,109 @@
+# C elegans
+
+```{r elegans library}
+library(here)
+library(readxl)
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(drc)
+theme_set(theme_bw())
+```
+
+```{r elegans introduction}
+data_0040 <-
+  readxl::read_excel(here("data_raw/data_0040/CE.LIQ.FLOW.062_Tidydata.xlsx"))
+data_0040
+```
+
+Column RawData has missing data in cells 192-196, or samples in vialNr 3, compName napthalene. These data points are NA in the data when loaded into R studio. Most compUnits use nM, Ethanol and S-medium use pct.
+
+```{r data wrangling}
+# compConcentration doesn't show up on a graph properly because its values are of chr type
+# change type compConcentration to numeric
+data_0040_tidy <- data_0040
+data_0040_tidy$compConcentration <- 
+  as.numeric(data_0040$compConcentration)
+```
+
+
+```{r elegans ggplot}
+# create ggplot, adding concentration to x-axis and measured data to y-axis
+# control/experiment are defined by shape, components are defined by colour
+data_0040_graph <- 
+  as_tibble(data_0040_tidy) %>%
+  ggplot(aes(x = compConcentration,
+             y = RawData,
+             shape = expType,
+             colour = compName)) +
+  geom_point(position = position_jitter(w = 0.03, h = 0)) + # jiter is added for viewing benefits
+  scale_x_continuous(trans = log10_trans()) + # log10 scale is applied to make results more readable.
+  labs(title = "title",
+       subtitle = "subtitle")
+print(data_0040_graph)
+```
+\
+The positive control = Ethanol\
+The negative control = S-medium\
+
+```{r elegans ggplot facet}
+# facet wrap to show individual graphs
+data_0040_graph +
+  facet_wrap(vars(compName))
+```
+\
+With the components split it is easier to see that there seems to be a downward trend in the offspring count once the concentration of the components increase.\
+
+```{r elegans ggplot normalized}
+# data is normalized for negative control by setting the mean of negative control to 1
+
+negative_control_mean <- data_0040_tidy %>%
+  filter(expType == "controlNegative") %>%
+  summarise(mean_value = mean(RawData, na.rm = TRUE)) %>%
+  pull(mean_value) # get the value from the mean_value in the tibble without having to use $mean_value
+
+# normalize the data:
+# if the data is negative control, set value to 1
+# else divide raw data by negative control mean to create value as a fraction
+data_0040_temp <- data_0040_tidy
+data_0040_normalized <- data_0040_temp %>%
+  mutate(
+    NormalizedData = if_else(expType == "controlNegative", 1, RawData / negative_control_mean)
+  )
+
+# print the normalized dataset
+print(data_0040_normalized)
+
+# print normalized dataset as ggplot
+data_0040_normalized_graph <-
+  data_0040_normalized %>%
+  ggplot(aes(x = compConcentration,
+             y = NormalizedData,
+             shape = expType,
+             colour = compName)) +
+  geom_point(position = position_jitter(w = 0.03, h = 0)) +
+  scale_x_continuous(trans = log10_trans(),
+                     labels = label_log()) +
+  labs(title = "title",
+       subtitle = "subtitle")
+print(data_0040_normalized_graph)
+
+data_0040_normalized_graph <-
+  data_0040_normalized %>%
+  ggplot(aes(x = compConcentration,
+             y = NormalizedData,
+             shape = expType,
+             colour = compName)) +
+  geom_point(position = position_jitter(w = 0.03, h = 0)) +
+  scale_x_log10() +
+  labs(title = "test",
+       subtitle = "subtitle")
+print(data_0040_normalized_graph)
+
+```
+\
+finish dose response with drc here
+```{r elegans dose response}
+# 
+data_0040_tidy %>% view
+```

@@ -1,0 +1,185 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Relational databases
+
+```{r relational_data_transfer, eval=FALSE}
+# https://lesmaterialen.rstudio.hu.nl/workflows-reader/relationaldb.html
+
+# https://robertochiosa.medium.com/import-export-r-packages-a6a122005e00
+
+# setwd("/Users/USER/Desktop/folder")
+# packages <- as.data.frame(installed.packages())  
+# write.csv(packages, 'packages.csv')
+
+# packages <- read.csv(file.path('packages.csv'))[, -1]
+# base_packages <- as.data.frame(installed.packages()) 
+# to_install <- setdiff(packages$Package, base_packages$Package) 
+# install.packages(to_install)
+```
+
+```{r relational_library}
+library(here)
+library(dslabs)
+library(tidyverse)
+```
+
+```{r relational_load_data}
+dengue_raw <- read.csv2(here::here("data_raw/data_0060/dengue_data.csv"),
+                        sep = ",",
+                        dec = ".",
+                        skip = 11)
+flu_raw <- read.csv2(here::here("data_raw/data_0060/flu_data.csv"),
+                     sep = ",",
+                     skip = 11)
+gapminder_raw <- gapminder
+
+```
+
+objective
+
+The Gapminder dataset contains data regarding health and income for 184
+countries from 1960 to 2016, such as: country, year, infant mortality
+per 1000, life expectancy in years, fertility in average number of
+children per woman, country population, GPD according to World Bankdev,
+continent and geographical region.
+
+The Gapminder dataset is compared to data retrieved from Google trends.
+The two used datasets contain the Google trend data for the flu and
+dengue, which is correlated with the occurrence of said diseases in and
+around its observed trend data.
+
+This exercise looks to compare the disease data to the general Gapminder
+data.
+
+This data is then stored to a new PostgreSQL database, analysed and
+visualized.
+
+```{r func_view, eval = FALSE}
+# inspecting the data made me annoyed with the fact that View is one of the few functions i use regularly and is capitalised.
+view <- utils::View
+
+# View(dengue_raw) # works
+
+# view(dengue_raw) # does not work, on Mac this view opens in a separate xquartz window, opens in a seperate window in Windows.
+
+view <- function(x, title = deparse(substitute(x))) {
+  if (exists("View", envir = as.environment("tools:rstudio"))) {
+    get("View", envir = as.environment("tools:rstudio"))(x, title)
+  } else {
+    utils::View(x, title)
+  }
+}
+
+# view(dengue_raw) # now checks for the rstudio env and uses it, if rstudio env does not exist default to regular View.
+```
+
+inspecting data:
+
+```{r dengue_raw_head}
+dengue_raw %>% head(n = c(2,4))
+```
+
+dengue raw: <br>   date: YYYY-MM-DD <br>   country: value <br>
+
+```{r flu_raw_head}
+na.omit(flu_raw) %>% head(n = c(2,4))
+# na.omit is used to show what the data looks like
+```
+
+flu raw: <br>   date: YYYY-MM-DD <br>   country: value <br>
+
+```{r gapminder_raw_head}
+gapminder %>% head(n = 2)
+```
+
+gapminder raw: <br>   date: YYYY-//-// <br>   country: country <br>  
+life_expectancy: value <br>   fertility: value <br>   population: value
+<br>   gdp: value <br>
+
+The best course of action would be to transform the flu and dengue data
+to fit into the Gapminder data. For this we need to change the date
+value into more general "year" values. We can choose between multiple
+strategies such as taking the highest value for a month, taking a median
+or an average. Next we need to rename the flu and dengue values with
+their own headers for easier identification when compared to the
+Gapminder data.
+
+We will lose out some details regarding specific dates but as we're
+comparing the data to the Gapminder "yearly" data we won't be able to
+use these details.
+
+```{r relational_wrangling}
+# date
+# country
+# activity
+
+# tidy data.
+# exclude the date to keep the column intact
+dengue_tidy <-
+  dengue_raw %>% pivot_longer(
+  cols = !`Date`,
+  names_to = "country",
+  values_to = "activity"
+)
+# change colname to lowercase
+colnames(dengue_tidy)[1] <- "date"
+
+# exclude the date to keep the column intact
+flu_tidy <-
+  flu_raw %>% pivot_longer(
+    cols = !`Date`,
+    names_to = "country",
+    values_to = "activity"
+  )
+
+# change colname to lowercase
+colnames(flu_tidy)[1] <- "date"
+
+# gapminder is loaded as is
+gapminder_tidy <-
+  gapminder_raw
+```
+
+```{r relationaljoining}
+# add year column for Gapminder dataset
+flu_tidy$year <- 
+  as.Date(flu_tidy$date) %>% format("%Y")
+
+dengue_tidy$year <-
+  as.Date(dengue_tidy$date) %>% format("%Y")
+
+# replace missing NA values with 0
+flu_tidy$activity[is.na(flu_tidy$activity)] <- 0
+dengue_tidy$activity[is.na(dengue_tidy$activity)] <- 0
+
+# group dataframe by country and year, add mean activity column for parity with Gapminder dataset
+
+flu_tidy_mean <-
+  flu_tidy %>% 
+  group_by(`country`, `year`) %>% 
+  mutate(flu_activity_mean = mean(activity))
+
+dengue_tidy_mean <-
+  dengue_tidy %>% 
+  group_by(`country`, `year`) %>% 
+  mutate(dengue_tidy_mean = mean(activity))
+```
+
+```{r relational_export}
+# Save files as csv and rds
+write.csv(flu_tidy_mean, here("data_output/data_0060/flu.csv"))
+saveRDS(flu_tidy_mean, here("data_output/data_0060/flu.rds"))
+
+write.csv(dengue_tidy_mean, here("data_output/data_0060/dengue.csv"))
+saveRDS(dengue_tidy_mean, here("data_output/data_0060/dengue.rds"))
+
+write.csv(gapminder_tidy, here("data_output/data_0060/gapminder.csv"))
+saveRDS(gapminder_tidy, here("data_output/data_0060/gapminder.rds"))
+
+# export to SQL
+# db_write_table(con, "gapminder_table", gapminder_tidy)
+```

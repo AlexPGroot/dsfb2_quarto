@@ -1,0 +1,39 @@
+# CV
+
+About me:
+
+Studied life sciences with major in molecular biology, transitioning into the field of data science. 
+Having experience in R programming and bash, I am eager to use my analytical skills on complex data sets combined with programming to gain data-driven insights into biological processes. 
+
+Personalia<br>
+Naam &nbsp; Alex Groot <br>
+Adres &nbsp; Zuiderpoort 10 <br>
+Postcode &nbsp; 2152 RG <br>
+Woonplaats &nbsp; Nieuw-Vennep <br>
+Telefoonnummer: &nbsp; 0618336455 <br>
+Mobiel nr. &nbsp; 0618336455 <br>
+Email &nbsp; Alex_groot@icloud.com <br>
+Geboortedatum &nbsp; 2 juli 1996 <br>
+
+Opleiding <br>
+Biologie en Medisch Laboratoriumonderzoek HBO Bachelor <br>
+Specialisatie Biomolecular Research <br>
+
+Data science vaardigheden <br>
+R (programming language)<br>
+Git<br>
+Data visualisation<br>
+Bash<br>
+Microsoft Excel<br>
+
+Werkervaring<br>
+Project genes and proteins:<br>
+Transfecteren van eukaryote cellen met recombinante plasmiden<br>
+SDS-PAGE<br>
+Western-blot<br>
+
+Project sphingolipids:<br>
+Literatuuronerzoek<br>
+Werken met meerdere cellijnen (SKNAS, HEK293T, HEPG2).<br>
+Opstellen en uitvoeren van assays (MTT, Amplex Red)<br>
+Thin Layer Chromatography (TLC)<br>

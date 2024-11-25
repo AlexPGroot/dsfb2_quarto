@@ -1,0 +1,22 @@
+[1]
+Filename:
+flu_data.csv
+
+Data retrieved from:
+https://github.com/73e7686a-68f4-48c8-981b-81cda0e8e060
+
+Description:
+Google trend data for flu
+
+[2]
+Filename:
+dengue_data.csv
+
+Data retrieved from:
+https://github.com/0d665e52-5020-44cb-b594-659813a10b13
+
+Description:
+Google trend data for dengue
+
+[3]
+gapminder data sourced from {dslabs} package within R.

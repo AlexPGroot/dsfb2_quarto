@@ -1,0 +1,16 @@
+# Looking ahead
+
+```
+Try, for yourself, to answer the following questions:
+
+Where do I want to be in ~2 years time?
+How am I doing now with respect to this goal?
+What would be the next skill to learn?
+Make a planning on how to start learning this new skill.
+```
+
+In 2 years time I will hopefully be working somewhere related to data sciences.
+As of now I am unsure of exactly where this will be and what skills will be required, therefore I am unable to answer exactly what I will need in order to achieve this goal.
+After my internship I won't necessarily be looking for biology-related data science jobs, so I am also looking for skills that would be versatile in multiple fields of data science. One of these would be machine learning which is a skill I'm looking into but of which I'm still unsure as to how it is utilized. 
+
+The first thing to do would be to look at different companies and job openings to see what skills are required by them and then delve deeper into what these entail and how/what to apply these on.

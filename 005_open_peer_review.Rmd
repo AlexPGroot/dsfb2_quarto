@@ -1,0 +1,130 @@
+# Open peer review
+
+***Write an Rmarkdown report on your findings, including the table above and some information about the article such as general aim, short methods and results. If data is available, try including some***
+
+
+This exercise is about identifying reproducibility issues in a scientific publication. 
+The reproducibility is scored by [the metrics used here](https://www.researchgate.net/publication/340244621_Reproducibility_and_reporting_practices_in_COVID-19_preprint_manuscripts). 
+
+Publications do not always contain a 'data availability statement', and those that do do not always contain any data. Statements range from 'not publicly available', 'available <i>on reasonable request</i>', 'publicly available' or 'publicly available, except not here and there is no link or text supplying said data'.
+
+We looked at this paper in this exercise:
+
+Jason C.K. Chan, Krista D. Manley, Dahwi Ahn, Does retrieval potentiate new learning when retrieval stops but new learning continues?, Journal of Memory and Language, Volume 115, 2020, 104150, ISSN 0749-596X https://doi.org/10.1016/j.jml.2020.104150
+
+The general aim of the experiment described in the article has to do with a concept called "the forward testing effect". This is a mechanic that enhances a learner's ability to learn new materials, which is a result of "interpolated retrieval opportunities" such as brief quizzes between learning sessions. The article examines the persistence of the forward testing effect when the students stop receiving these interpolated retrieval opportunities.
+
+This was tested through four different experiments. The general experimental setup was to have undergrad students from Iowa State University participate instructed to study a list of words with the goal of having a test at the end. The students were given learning instructions and were informed that they might randomly be given interpolated tests by the computer. The experiments differed in at which moments the interpolated tests occurred and the experimental results were measured by the student's final performance.
+
+The study suggests that consistently performing these retrieval opportunities provides a benefit to retaining the information as observed by the improved results. When the interpolated testing is stopped however, its advantages are diminished substantially. 
+
+Using the metrics from the aforementioned initial publication we score this paper as follows:
+
+| Transparency Criteria| Definition       | Response |
+|---------|-------------------------------|----------|
+|Study Purpose |A concise statement in the introduction of the article, often in the last paragraph, that establishes the reason the research was conducted. Also called the study objective.| Yes| 
+|Data Availability Statement | A statement, in an individual section offset from the main body of text, that explains how or if one can access a study’s data. The title of the section may vary, but it must explicitly mention data; it is therefore distinct from a supplementary materials section.| No, supplementary only|
+|Data Location | Where the article’s data can be accessed, either raw or processed.| No|
+|Study Location| Author has stated in the methods section where the study took place or the data’s country/region of origin.| No, participant's origin only|
+|Author Review| The professionalism of the contact information that the author has provided in the manuscript.|Yes, email|
+|Ethics Statement | A statement within the manuscript indicating any ethical concerns, including the presence of sensitive data.|No|
+|Funding Statement| A statement within the manuscript indicating whether or not the authors received funding for their research.|No|
+Code Availability | Authors have shared access to the most updated code that they used in their study, including code used for analysis. |No|
+
+While the paper states that it has supplementary data available with a doi linking to the paper: [https://doi.org/10.1016/j.jml.2020.104150](https://doi.org/10.1016/j.jml.2020.104150)
+It does not contain an actual data availability statement as mentioned before, however upon further inspection the results under experiment 1 does contain a broken link https://doi.org//10.17605/OSF.IO/ G2Y93 due to a space and a working url https://osf.io/g2y93 to the OSF version which contains the data used in the paper.
+
+```{r dir_tree}
+fs::dir_tree(here::here("data_raw/data_0050/osfstorage-archive/"))
+library(tidyverse) # REMOVE
+```
+Files are clearly named and a readme.txt containing metadata file is included.
+
+
+```{r head_code}
+read.csv(here::here("data_raw/data_0050/osfstorage-archive/TPL-TMNT E1 Data OSF.csv")) %>% head()
+```
+The data provided is in tidy format, which makes for easy data manipulation and analysis. The data does not contain any R code, however the analysis in the original paper was performed in Jeffreys’s Amazing Statistics Program (JASP), which is a program written in C++ and QML, but the analyses themselves are written in R using packages from CRAN.
+
+```{r exp_1}
+# load data
+data <- read.csv(here::here("data_raw/data_0050/osfstorage-archive/TPL-TMNT E1 Data OSF.csv"))
+
+# check the data
+data %>% 
+  summary()
+
+data %>%
+  head()
+
+# we use the data used in the list 4 correct recall
+data_e1 <- 
+  data %>% dplyr::select(`Condition`, `L4_RclP`)
+
+# Assuming your condition column is a factor, if not, convert it to factor
+data_e1$Condition <- factor(data_e1$Condition)
+
+# Summarize the data to get the average values and standard deviations for each condition
+data_summary <- data_e1 %>%
+  group_by(Condition) %>%
+  summarize(average = mean(L4_RclP),
+            sd = sd(L4_RclP))
+
+# create the plot
+data_e1_plot <- ggplot(data = data_summary,
+                       aes(x = average, y = Condition)) +
+                  geom_bar(stat = "identity", width = 0.25) + 
+  scale_x_continuous(breaks = seq(0,0.8, by = 0.1)) + # set scale similar to original plot in paper
+                  geom_errorbar(aes(xmin = average - sd, xmax = average + sd), # calculate errorbars using sd
+                                width = 0.2,
+                                color = "white") +  # adjust color of error bars
+                  labs(title = "Memory performance during List 4 recall in Experiment 1",
+       x = "Proportion of List 4 Correct Recall",
+       y = NULL) + # Y-axis are self-explanatory
+  theme(plot.background = element_rect(fill = "#2D3143"), # region outside plot
+        panel.background = element_rect(fill = "#2D3143"), # region inside plot
+        panel.grid = element_line(color = "darkgrey"), # grid color
+        plot.title = element_text(color = "white"), # make text white in dark-mode
+        plot.subtitle = element_text(color = "white"), # make text white in dark-mode
+        axis.text.x = element_text(color = "white"), # make text white in dark-mode
+        axis.text.y = element_text(color = "white"), # make text white in dark-mode
+        axis.title.x.bottom = element_text(color = "white"), # make text white in dark-mode
+        axis.title.y.left = element_text(color = "white") # make text white in dark-mode
+        )
+data_e1_plot
+```
+To compare our replicated plot to the original from the paper:
+
+![image](~/dsfb2_workflows_portfolio/data_raw/data_0050/original_plot.png)
+```{r ANOVA}
+one.way <- aov(L4_RclP ~ Condition, data = data_e1)
+summary(one.way)
+```
+Returns F(2, 117) = 22.51, p < 0.001,
+whereas the original paper's result is F(2, 117) = 22.57, p < 0.001.
+```{r ttests}
+data_e1$Condition %>% unique()
+
+t.test(
+  L4_RclP ~ Condition, 
+  data = data_e1, 
+  subset = Condition == "Always-Tested" | Condition == "Not-Tested")
+```
+Mean Always-Tested = 0.72 and Not-Tested 0.36 with t(78) = 6.98 , p < 0.001
+```{r}
+t.test(
+  L4_RclP ~ Condition,
+  data = data_e1,
+  subset = Condition == "Early-Tested" | Condition == "Not-Tested")
+```
+Mean Early-Tested = 0.51, t(78) = 2.73, p = 0.008
+```{r}
+t.test(
+  L4_RclP ~ Condition,
+  data = data_e1,
+  subset = Condition == "Early-Tested" | Condition == "Always-Tested")
+```
+t(78) = 3.84, p < 0,001
+
+It is possible to replicate the data from the paper in some way however, not all results are identical.
+Providing the raw data, rather than the source code, leaves the person replicating the results open to the possibility of making different choices regarding the methods of analysis and is also prone to user-errors. One of the pillars of open science is indeed data, but so is code. And even relatively simple analyses can be interpreted differently by different people, while providing code provides a way to both reproduce the analyses but also provide a vector for other people to learn.

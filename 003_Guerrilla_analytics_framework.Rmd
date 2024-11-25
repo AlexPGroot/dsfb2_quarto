@@ -1,0 +1,585 @@
+# Guerrilla analytics
+Guerrilla Analytics is data analytics performed in a very dynamic project environment that presents the team with varied and frequent disruptions and constrains the team in terms of the resources they can bring to bear on their analytics problem. <br>
+From: <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780128002186000011">Guerrilla Analytics, 2015</a>
+
+<br>Data science projects can get big, and keeping all files and folders tidy makes sure that it will stay possible to go through all the files and see how the analyses are performed. Keeping a well managed structure also allows for easier reproduction of the performed analyses when the folders are sent to other data scientist.
+<br>
+<br>First we take a look at what a general folder structure might look like after a few weeks of assignments:
+
+```{css, echo=FALSE}
+.FixedHeightContainer
+{
+  height: 700px;
+  padding: 3px; 
+  background: rgba(0, 0, 0, .1);
+  /* background: #fafafa; */
+}
+.Content
+{
+  height: 624px;
+  overflow: scroll;
+  background: rgba(0, 0, 0, .1);
+  /*background: #fafafa;*/
+}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+```
+
+<div class="FixedHeightContainer">
+  <h3>Old folder structure:</h3>
+  <div class="Content">
+
+   fs::dir_tree(path = "/Users/Alex/Documents/daur2/daurII_students_OLD") <br>
+/Users/Alex/Documents/daur2/daurII_students_OLD <br>
+├── Alex_Groot copy.csv <br>
+├── Alex_Groot_1730201_Capstone_Exam_ABDS_DAUR2_BIOC.Rmd <br>
+├── Alex_Groot_1730201_Capstone_Exam_ABDS_DAUR2_BIOC.html <br>
+├── Andy.csv <br>
+├── David.csv <br>
+├── EXAM <br>
+│   ├── capstone_exam.Rmd <br>
+│   ├── capstone_exam.html <br>
+│   └── capstone_exam.md <br>
+├── GDS858.soft.gz <br>
+├── GPL11154.soft <br>
+├── GPL96.soft <br>
+├── GSE116936 <br>
+│   └── GSE116936_RAW.tar <br>
+├── GSE116936_series_matrix.txt.gz <br>
+├── GSE116936_supp_files <br>
+│   ├── GSM3264576_A1-Ctrl.txt.gz <br>
+│   ├── GSM3264577_A2-Ctrl.txt.gz <br>
+│   ├── GSM3264578_A3-Ctrl.txt.gz <br>
+│   ├── GSM3264579_B1-PGE2.txt.gz <br>
+│   ├── GSM3264580_B2-PGE2.txt.gz <br>
+│   ├── GSM3264581_B3-PGE2.txt.gz <br>
+│   ├── GSM3264582_I1-TNF.txt.gz <br>
+│   ├── GSM3264583_I2-TNF.txt.gz <br>
+│   ├── GSM3264584_I3-TNF.txt.gz <br>
+│   ├── GSM3264585_J1-TNF+PGE2.txt.gz <br>
+│   ├── GSM3264586_J2-TNF+PGE2.txt.gz <br>
+│   └── GSM3264587_J3-TNF+PGE2.txt.gz <br>
+├── GSE148829 <br>
+│   ├── GSE148829_BEAS_Basal_Pops_TPM.txt.gz <br>
+│   ├── GSE148829_Human1_Basal_Pops_TPM.txt.gz <br>
+│   ├── GSE148829_Human2_Basal_Pops_TPM.txt.gz <br>
+│   ├── GSE148829_Human_Ileum_absorptiveAndCryptentero_dge.csv.gz <br>
+│   ├── GSE148829_Human_lung_epithelial_cell_raw_counts.txt.gz <br>
+│   ├── GSE148829_Mouse_Basal_Pops_TPM.txt.gz <br>
+│   ├── GSE148829_NHP_TB_Grans_and_Lung_dge.txt.gz <br>
+│   ├── GSE148829_NHP_ileum_epithelial_raw_expression_counts.csv.gz <br>
+│   ├── GSE148829_NHP_lung_epithelial_raw_expression_counts.csv.gz <br>
+│   ├── GSE148829_NasalSSS_cleaned_raw_expression_counts.csv.gz <br>
+│   ├── GSE148829_RAW <br>
+│   │   ├── GSM4487938_Mouse_Nasal_IFNa_NH11_dge.txt.gz <br>
+│   │   ├── GSM4487939_Mouse_Nasal_IFNa_NH12_dge.txt.gz <br>
+│   │   ├── GSM4487940_Mouse_Nasal_IFNa_NH21_dge.txt.gz <br>
+│   │   ├── GSM4487941_Mouse_Nasal_IFNa_NH22_dge.txt.gz <br>
+│   │   ├── GSM4487942_Mouse_Nasal_IFNa_NS11_dge.txt.gz <br>
+│   │   ├── GSM4487943_Mouse_Nasal_IFNa_NS12_dge.txt.gz <br>
+│   │   ├── GSM4487944_Mouse_Nasal_IFNa_NS21_dge.txt.gz <br>
+│   │   ├── GSM4487945_Mouse_Nasal_IFNa_NS22_dge.txt.gz <br>
+│   │   ├── GSM4488219_Mouse_basal_stim_IFNA_0.1_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488220_Mouse_basal_stim_IFNA_0.1_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488221_Mouse_basal_stim_IFNA_0.1_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488222_Mouse_basal_stim_IFNA_0.5_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488223_Mouse_basal_stim_IFNA_0.5_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488224_Mouse_basal_stim_IFNA_0.5_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488225_Mouse_basal_stim_IFNB_0.1_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488226_Mouse_basal_stim_IFNB_0.1_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488227_Mouse_basal_stim_IFNB_0.1_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488228_Mouse_basal_stim_IFNB_0.5_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488229_Mouse_basal_stim_IFNB_0.5_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488230_Mouse_basal_stim_IFNB_0.5_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488231_Mouse_basal_stim_IFNA_1_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488232_Mouse_basal_stim_IFNA_1_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488233_Mouse_basal_stim_IFNA_1_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488234_Mouse_basal_stim_IFNA_2_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488235_Mouse_basal_stim_IFNA_2_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488236_Mouse_basal_stim_IFNA_2_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488237_Mouse_basal_stim_IFNB_1_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488238_Mouse_basal_stim_IFNB_1_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488239_Mouse_basal_stim_IFNB_1_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488240_Mouse_basal_stim_IFNB_2_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488241_Mouse_basal_stim_IFNB_2_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488242_Mouse_basal_stim_IFNB_2_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488243_Mouse_basal_stim_IFNA_5_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488244_Mouse_basal_stim_IFNA_5_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488245_Mouse_basal_stim_IFNA_5_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488246_Mouse_basal_stim_IFNA_10_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488247_Mouse_basal_stim_IFNA_10_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488248_Mouse_basal_stim_IFNA_10_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488249_Mouse_basal_stim_IFNB_5_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488250_Mouse_basal_stim_IFNB_5_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488251_Mouse_basal_stim_IFNB_5_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488252_Mouse_basal_stim_IFNB_10_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488253_Mouse_basal_stim_IFNB_10_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488254_Mouse_basal_stim_IFNB_10_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488255_Mouse_basal_stim_IFNG_0.1_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488256_Mouse_basal_stim_IFNG_0.1_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488257_Mouse_basal_stim_IFNG_0.1_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488258_Mouse_basal_stim_IFNG_0.5_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488259_Mouse_basal_stim_IFNG_0.5_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488260_Mouse_basal_stim_IFNG_0.5_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488261_Mouse_basal_stim_IFNG_1_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488262_Mouse_basal_stim_IFNG_1_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488263_Mouse_basal_stim_IFNG_1_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488264_Mouse_basal_stim_IFNG_2_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488265_Mouse_basal_stim_IFNG_2_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488266_Mouse_basal_stim_IFNG_2_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488267_Mouse_basal_stim_IFNG_5_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488268_Mouse_basal_stim_IFNG_5_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488269_Mouse_basal_stim_IFNG_5_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488270_Mouse_basal_stim_IFNG_10_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488271_Mouse_basal_stim_IFNG_10_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488272_Mouse_basal_stim_IFNG_10_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488273_Mouse_basal_stim_Untreated_0_REP1_TPM.txt.gz <br>
+│   │   ├── GSM4488274_Mouse_basal_stim_Untreated_0_REP2_TPM.txt.gz <br>
+│   │   ├── GSM4488275_Mouse_basal_stim_Untreated_0_REP3_TPM.txt.gz <br>
+│   │   ├── GSM4488276_Mouse_basal_stim_Untreated_0_REP4_TPM.txt.gz <br>
+│   │   ├── GSM4488277_Mouse_basal_stim_Untreated_0_REP5_TPM.txt.gz <br>
+│   │   ├── GSM4488278_Mouse_basal_stim_Untreated_0_REP6_TPM.txt.gz <br>
+│   │   ├── GSM4488279_Mouse_basal_stim_Untreated_0_REP7_TPM.txt.gz <br>
+│   │   ├── GSM4488280_Mouse_basal_stim_Untreated_0_REP8_TPM.txt.gz <br>
+│   │   ├── GSM4488281_Mouse_basal_stim_Untreated_0_REP9_TPM.txt.gz <br>
+│   │   ├── GSM4488282_Mouse_basal_stim_Untreated_0_REP10_TPM.txt.gz <br>
+│   │   ├── GSM4488283_Mouse_basal_stim_Untreated_0_REP11_TPM.txt.gz <br>
+│   │   └── GSM4488284_Mouse_basal_stim_Untreated_0_REP12_TPM.txt.gz <br>
+│   └── GSE148829_RAW.tar <br>
+├── GSE75073 <br>
+│   ├── GSE75073_RAW.tar <br>
+│   ├── GSE75073_Signals_450k.txt.gz <br>
+│   └── GSE75073_Signals_Epic.txt.gz <br>
+├── GSE76073 <br>
+│   ├── GSE76073_Normalized_counts.txt.gz <br>
+│   └── GSE76073_Raw_counts.txt.gz <br>
+├── GSE923_series_matrix.txt.gz <br>
+├── Images <br>
+│   ├── 2020-04-20CORT.png <br>
+│   ├── 20200403_citrul.png <br>
+│   ├── 20200404_citrul.png <br>
+│   ├── 20200404_ifabp.png <br>
+│   ├── Bioconductor.png <br>
+│   ├── Biostrings.png <br>
+│   ├── BrowseSeq <br>
+│   │   ├── Dia1.PNG <br>
+│   │   └── sequence_alignment_plots <br>
+│   │       ├── Dia1.PNG <br>
+│   │       ├── Dia2.PNG <br>
+│   │       ├── Dia3.PNG <br>
+│   │       ├── Dia4.PNG <br>
+│   │       ├── Dia5.PNG <br>
+│   │       ├── Dia6.PNG <br>
+│   │       ├── Dia7.PNG <br>
+│   │       └── Dia8.PNG <br>
+│   ├── DESeq2.png <br>
+│   ├── Dia1.JPG <br>
+│   ├── Dia3.JPG <br>
+│   ├── GenomicRanges.png <br>
+│   ├── Git_Setup_1.JPG <br>
+│   ├── Glimma.png <br>
+│   ├── IRanges.png <br>
+│   ├── MSnbase.png <br>
+│   ├── Project_1.jpg <br>
+│   ├── Project_2.jpg <br>
+│   ├── Rlogo.png <br>
+│   ├── Rtools.png <br>
+│   ├── bioconductorlogo.jpg <br>
+│   ├── cat_sleeping_on_keyboard.jpg <br>
+│   ├── citrulline.png <br>
+│   ├── connectome-1.png <br>
+│   ├── cortline.png <br>
+│   ├── covid19_ziekenhuis.png <br>
+│   ├── dotdotdot_rotate_axis.png <br>
+│   ├── edgeR.png <br>
+│   ├── exercise_2_1_1.png <br>
+│   ├── exercise_2_1_1_c.png <br>
+│   ├── forcats.png <br>
+│   ├── git_web.png <br>
+│   ├── gitinstallermac.png <br>
+│   ├── heatmap.png <br>
+│   ├── heatmap1.png <br>
+│   ├── heatmap2.png <br>
+│   ├── hex-ggplot2.png <br>
+│   ├── installpackages.png <br>
+│   ├── loadpackages.png <br>
+│   ├── logo_R.jpg <br>
+│   ├── ma1.png <br>
+│   ├── ma2.png <br>
+│   ├── mzR_hl.png <br>
+│   ├── new_proj_done.png <br>
+│   ├── new_proj_git.png <br>
+│   ├── one-doesnot-simply.jpg <br>
+│   ├── open_486.jpg <br>
+│   ├── open_compaq.jpg <br>
+│   ├── pca1.png <br>
+│   ├── pepper.jpg <br>
+│   ├── pipe.png <br>
+│   ├── purrr_small.png <br>
+│   ├── purrr_sticker.jpg <br>
+│   ├── pvalues.png <br>
+│   ├── r4ds.png <br>
+│   ├── readr_sticker.png <br>
+│   ├── readxl_sticker.png <br>
+│   ├── rmac_download.png <br>
+│   ├── rstudio_download.png <br>
+│   ├── rstudio_leeg.png <br>
+│   ├── rwin_download.png <br>
+│   ├── security.png <br>
+│   ├── setup-wizard-rstudio.png <br>
+│   ├── setupRtools.png <br>
+│   ├── stringr.png <br>
+│   ├── summarizedexperiment.png <br>
+│   ├── tidyr_sticker.png <br>
+│   ├── tidyverse_sticker.png <br>
+│   ├── usrlocal.png <br>
+│   ├── wizardRmac.png <br>
+│   ├── wizardRwindows.png <br>
+│   ├── wontinstall.png <br>
+│   ├── workflow_course.png <br>
+│   ├── xquarkdisk.png <br>
+│   ├── xquarkwizard.png <br>
+│   ├── xquartz.png <br>
+│   └── yoda_the_last_jedi.jpg <br>
+├── John.csv <br>
+├── Les 6.Rmd <br>
+├── Les4.Rmd <br>
+├── Les4.nb.html <br>
+├── Les5.Rmd <br>
+├── Lesson_5_Exercise_a1.Rmd <br>
+├── Mike.csv <br>
+├── R <br>
+│   └── do_tidy_pertussis.R <br>
+├── README.md <br>
+├── Steve.csv <br>
+├── answers <br>
+│   ├── daur2_lesson51_demo_multiple_sequence_alignment.Rmd <br>
+│   ├── daur2_lesson51_demo_multiple_sequence_alignment.html <br>
+│   ├── daur2_lesson51_demo_multiple_sequence_alignment_files <br>
+│   │   └── figure-html <br>
+│   │       ├── unnamed-chunk-23-1.png <br>
+│   │       ├── unnamed-chunk-24-1.png <br>
+│   │       ├── unnamed-chunk-29-1.png <br>
+│   │       └── unnamed-chunk-30-1.png <br>
+│   ├── daur2_lesson_6_exercise_rnaseq.Rmd <br>
+│   ├── daur2_lesson_6_exercise_rnaseq.html <br>
+│   ├── daur2_lesson_6_exercise_rnaseq_student_version.Rmd <br>
+│   └── daur2_lesson_6_exercise_rnaseq_student_version.html <br>
+├── caspase_align.aux <br>
+├── caspase_align.log <br>
+├── caspase_align.tex <br>
+├── code <br>
+│   └── load_data.R <br>
+├── data <br>
+│   ├── CISID_pertussis_10082018.csv <br>
+│   ├── biomaRt_homology_example.rds <br>
+│   ├── biomaRt_homology_example_aa.rds <br>
+│   ├── biomaRt_homology_example_dna.rds <br>
+│   ├── chircus_blg_aminoacids.fasta <br>
+│   ├── course_r_packages.tsv <br>
+│   ├── course_r_packages.txt <br>
+│   ├── covid_rivm <br>
+│   ├── go_bp-hit.csv <br>
+│   ├── go_cc-hit.csv <br>
+│   ├── go_mf-hit.csv <br>
+│   ├── hobbit_chapter.txt <br>
+│   ├── hobbit_dwarves.txt <br>
+│   ├── hox_aa_sequences.txt <br>
+│   ├── hox_dna_sequences.txt <br>
+│   ├── human_hoxb1_protein.fasta <br>
+│   ├── human_hoxb1_protein.gb <br>
+│   ├── human_rhodopsin_protein.fasta <br>
+│   ├── human_ttn_genomic_dna.fasta <br>
+│   ├── jp_coldata.txt <br>
+│   ├── jp_counts.txt <br>
+│   ├── jp_features.txt <br>
+│   ├── jp_miame.rds <br>
+│   ├── jp_miame.txt <br>
+│   ├── lesson2 <br>
+│   │   ├── ENST00000642929.1.fa <br>
+│   │   ├── ENST00000643997.1.fa <br>
+│   │   ├── ENST00000644264.1.fa <br>
+│   │   ├── ENST00000644696.1.fa <br>
+│   │   ├── ENST00000644919.1.fa <br>
+│   │   ├── ENST00000646017.1.fa <br>
+│   │   ├── ENST00000646618.2.fa <br>
+│   │   ├── ENST00000646644.1.fa <br>
+│   │   ├── ENST00000647220.1.fa <br>
+│   │   ├── ENST00000647443.1.fa <br>
+│   │   ├── cholesterol.xlsx <br>
+│   │   ├── diet <br>
+│   │   │   ├── Andy.csv <br>
+│   │   │   ├── David.csv <br>
+│   │   │   ├── John.csv <br>
+│   │   │   ├── Mike.csv <br>
+│   │   │   └── Steve.csv <br>
+│   │   ├── diet_data.zip <br>
+│   │   └── sequence1.txt <br>
+│   └── lesson3 <br>
+│       ├── GO-terms.txt <br>
+│       ├── dna_random <br>
+│       ├── sequence.fasta <br>
+│       ├── sequence1.txt <br>
+│       └── sequence2.txt <br>
+├── daurII_students <br>
+│   ├── R <br>
+│   │   └── do_tidy_pertussis.R <br>
+│   ├── README.md <br>
+│   ├── code <br>
+│   │   └── load_data.R <br>
+│   ├── data <br>
+│   │   ├── CISID_pertussis_10082018.csv <br>
+│   │   ├── course_r_packages.tsv <br>
+│   │   ├── covid_rivm <br>
+│   │   ├── go_bp-hit.csv <br>
+│   │   ├── go_cc-hit.csv <br>
+│   │   ├── go_mf-hit.csv <br>
+│   │   ├── hobbit_chapter.txt <br>
+│   │   ├── hobbit_dwarves.txt <br>
+│   │   ├── hox_aa_sequences.txt <br>
+│   │   ├── hox_dna_sequences.txt <br>
+│   │   ├── human_hoxb1_protein.fasta <br>
+│   │   ├── human_hoxb1_protein.gb <br>
+│   │   ├── human_rhodopsin_protein.fasta <br>
+│   │   ├── human_ttn_genomic_dna.fasta <br>
+│   │   └── lesson2 <br>
+│   │       └── diet_data.zip <br>
+│   ├── daurII_students.Rproj <br>
+│   └── demos <br>
+│       └── 01_demo_functions.Rmd <br>
+├── daurII_students.Rproj <br>
+├── demos <br>
+│   ├── 01_demo_functions.Rmd <br>
+│   ├── 021_demo_2_agenda.Rmd <br>
+│   ├── 021_demo_2_agenda.html <br>
+│   ├── 022_lesson2_map_nest.Rmd <br>
+│   ├── 022_lesson2_map_nest.html <br>
+│   ├── 031_strings_and_regex.Rmd <br>
+│   ├── 031_strings_and_regex.html <br>
+│   ├── 031_strings_and_regex.pdf <br>
+│   ├── 041_biomart.Rmd <br>
+│   ├── 042_geoquery.Rmd <br>
+│   ├── 043_rentrez.Rmd <br>
+│   ├── 051_demo_multiple_sequence_alignment.Rmd <br>
+│   ├── 051_demo_multiple_sequence_alignment.html <br>
+│   ├── 051_demo_multiple_sequence_alignment.md <br>
+│   ├── 051_demo_multiple_sequence_alignment_files <br>
+│   │   └── figure-html <br>
+│   │       ├── unnamed-chunk-23-1.png <br>
+│   │       ├── unnamed-chunk-24-1.png <br>
+│   │       ├── unnamed-chunk-29-1.png <br>
+│   │       └── unnamed-chunk-30-1.png <br>
+│   ├── 052_demo_summarized_experiment.Rmd <br>
+│   ├── 052_demo_summarized_experiment.html <br>
+│   ├── 052_demo_summarized_experiment.md <br>
+│   ├── 61_heatmaps.Rmd <br>
+│   ├── 61_heatmaps.html <br>
+│   ├── 62_rnseq_workflow.Rmd <br>
+│   └── 62_rnseq_workflow.html <br>
+├── les1.Rmd <br>
+├── les1.nb.html <br>
+├── les2.Rmd <br>
+├── les2.nb.html <br>
+├── les3.Rmd <br>
+├── my_transcript.fasta <br>
+├── resources.Rmd <br>
+└── unzip <br>
+    ├── Andy.csv <br>
+    ├── David.csv <br>
+    ├── John.csv <br>
+    ├── Mike.csv <br>
+    └── Steve.csv <br>
+</div>
+</div>
+
+<br>
+<br>
+As you can see, the original file structure used during the earlier data science course is quite the mess.
+Instead we now make usage of the Guerilla analytics framework to store data and manage files.
+Using simple structures to store data, code, generated graphs and  makes it easier to use and replicate analyses, even years after the analyses are performed.
+<br>
+Making sure all files in a environment pertain only to that single project is important. And to make data storage simple, a central data folder in the root of the enviornment is used with clear naming conventions, dates and versions. Also metadata files are used to allow anyone with access to the project to see what the contents of the project are.
+<br>
+<br>Here is the above file structure, with the guerilla analytics framework <b>retroactively </b>applied:
+<br>
+<div class="FixedHeightContainer">
+  <h3>New folder structure:</h3>
+  <div class="Content">
+├── EXAM <br>
+│   ├── Alex_Groot copy.csv <br>
+│   ├── capstone_exam.Rmd <br>
+│   ├── capstone_exam.html <br>
+│   └── capstone_exam.md <br>
+├── Images <br>
+│   ├── 2020-04-20CORT.png <br>
+│   ├── 20200403_citrul.png <br>
+│   ├── BrowseSeq <br>
+│   │   ├── Dia1.PNG <br>
+│   │   └── sequence_alignment_plots <br>
+│   │       ├── Dia1.PNG <br>
+│   │       ├── Dia2.PNG <br>
+│   └── yoda_the_last_jedi.jpg <br>
+├── R <br>
+│   └── do_tidy_pertussis.R <br>
+├── README.md <br>
+├── caspase_align.aux <br>
+├── caspase_align.log <br>
+├── caspase_align.tex <br>
+├── code <br>
+│   └── load_data.R <br>
+├── data_raw <br>
+│   ├── lesson2 <br>
+│   │   ├── ENST00000642929.1.fa <br>
+│   │   ├── ENST00000643997.1.fa <br>
+│   │   ├── ENST00000644264.1.fa <br>
+│   │   ├── cholesterol.xlsx <br>
+│   │   ├── diet <br>
+│   │   │   ├── Andy.csv <br>
+│   │   │   └── Steve.csv <br>
+│   │   ├── diet_data.zip <br>
+│   │   └── sequence1.txt <br>
+│   ├── lesson3 <br>
+│   │   ├── GO-terms.txt <br>
+│   │   ├── dna_random <br>
+│   │   ├── sequence.fasta <br>
+│   │   ├── sequence1.txt <br>
+│   │   └── sequence2.txt <br>
+│   └── unsorted <br>
+│       ├── Andy.csv <br>
+│       ├── CISID_pertussis_10082018.csv <br>
+│       ├── David.csv <br>
+│       ├── GSE116936 <br>
+│       │   └── GSE116936_RAW.tar <br>
+│       ├── GSE116936_series_matrix.txt.gz <br>
+│       ├── GSE116936_supp_files <br>
+│       │   ├── GSM3264576_A1-Ctrl.txt.gz <br>
+│       │   ├── GSM3264577_A2-Ctrl.txt.gz <br>
+│       │   ├── GSM3264578_A3-Ctrl.txt.gz <br>
+│       │   ├── GSM3264585_J1-TNF+PGE2.txt.gz <br>
+│       │   ├── GSM3264586_J2-TNF+PGE2.txt.gz <br>
+│       │   └── GSM3264587_J3-TNF+PGE2.txt.gz <br>
+│       ├── GSE148829 <br>
+│       │   ├── GSE148829_BEAS_Basal_Pops_TPM.txt.gz <br>
+│       │   ├── GSE148829_Human1_Basal_Pops_TPM.txt.gz <br>
+│       │   ├── GSE148829_Human2_Basal_Pops_TPM.txt.gz <br>
+│       │   │   ├── GSM4487938_Mouse_Nasal_IFNa_NH11_dge.txt.gz <br>
+│       │   │   ├── GSM4487939_Mouse_Nasal_IFNa_NH12_dge.txt.gz <br>
+│       │   │   ├── GSM4487940_Mouse_Nasal_IFNa_NH21_dge.txt.gz <br>
+│       │   │   ├── GSM4487941_Mouse_Nasal_IFNa_NH22_dge.txt.gz <br>
+│       │   │   ├── GSM4487942_Mouse_Nasal_IFNa_NS11_dge.txt.gz <br>
+│       │   │   ├── GSM4487943_Mouse_Nasal_IFNa_NS12_dge.txt.gz <br>
+│       │   │   ├── GSM4487944_Mouse_Nasal_IFNa_NS21_dge.txt.gz <br>
+│       │   │   ├── GSM4487945_Mouse_Nasal_IFNa_NS22_dge.txt.gz <br>
+│       │   │   ├── GSM4488282_Mouse_basal_stim_Untreated_0_REP10_TPM.txt.gz <br>
+│       │   │   ├── GSM4488283_Mouse_basal_stim_Untreated_0_REP11_TPM.txt.gz <br>
+│       │   │   └── GSM4488284_Mouse_basal_stim_Untreated_0_REP12_TPM.txt.gz <br>
+│       │   └── GSE148829_RAW.tar <br>
+│       ├── GSE75073 <br>
+│       │   ├── GSE75073_RAW.tar <br>
+│       │   ├── GSE75073_Signals_450k.txt.gz <br>
+│       │   └── GSE75073_Signals_Epic.txt.gz <br>
+│       ├── GSE76073 <br>
+│       │   ├── GSE76073_Normalized_counts.txt.gz <br>
+│       │   └── GSE76073_Raw_counts.txt.gz <br>
+│       ├── GSE923_series_matrix.txt.gz <br>
+│       ├── human_hoxb1_protein.fasta <br>
+│       ├── human_hoxb1_protein.gb <br>
+│       ├── human_rhodopsin_protein.fasta <br>
+│       ├── human_ttn_genomic_dna.fasta <br>
+│       ├── jp_coldata.txt <br>
+│       ├── jp_counts.txt <br>
+│       ├── jp_features.txt <br>
+│       ├── jp_miame.txt <br>
+│       ├── my_transcript.fasta <br>
+│       └── unzip <br>
+│           ├── Andy.csv <br>
+│           ├── David.csv <br>
+│           ├── John.csv <br>
+│           ├── Mike.csv <br>
+│           └── Steve.csv <br>
+├── data_rds <br>
+│   ├── biomaRt_homology_example.rds <br>
+│   ├── biomaRt_homology_example_aa.rds <br>
+│   ├── biomaRt_homology_example_dna.rds <br>
+│   └── jp_miame.rds <br>
+├── daurII_students <br>
+│   ├── R <br>
+│   │   └── do_tidy_pertussis.R <br>
+│   ├── README.md <br>
+│   ├── code <br>
+│   │   └── load_data.R <br>
+│   ├── data <br>
+│   │   ├── CISID_pertussis_10082018.csv <br>
+│   │   ├── course_r_packages.tsv <br>
+│   │   ├── covid_rivm <br>
+│   │   ├── human_rhodopsin_protein.fasta <br>
+│   │   ├── human_ttn_genomic_dna.fasta <br>
+│   │   └── lesson2 <br>
+│   │       └── diet_data.zip <br>
+│   ├── daurII_students.Rproj <br>
+│   └── demos <br>
+│       └── 01_demo_functions.Rmd <br>
+├── daurII_students.Rproj <br>
+├── demos <br>
+│   ├── 01_demo_functions.Rmd <br>
+│   ├── 021_demo_2_agenda.Rmd <br>
+│   ├── 021_demo_2_agenda.html <br>
+│   ├── 61_heatmaps.Rmd <br>
+│   ├── 61_heatmaps.html <br>
+│   ├── 62_rnseq_workflow.Rmd <br>
+│   └── 62_rnseq_workflow.html <br>
+└── markdown <br>
+    ├── Alex_Groot_1730201_Capstone_Exam_ABDS_DAUR2_BIOC.Rmd <br>
+    ├── Alex_Groot_1730201_Capstone_Exam_ABDS_DAUR2_BIOC.html <br>
+    ├── Les 6.Rmd <br>
+    ├── Les4.Rmd <br>
+    ├── Les4.nb.html <br>
+    ├── Les5.Rmd <br>
+    ├── Lesson_5_Exercise_a1.Rmd <br>
+    ├── answers <br>
+    │   ├── daur2_lesson51_demo_multiple_sequence_alignment.Rmd <br>
+    │   ├── daur2_lesson51_demo_multiple_sequence_alignment.html <br>
+    │   ├── daur2_lesson51_demo_multiple_sequence_alignment_files <br>
+    │   │   └── figure-html <br>
+    │   │       ├── unnamed-chunk-23-1.png <br>
+    │   │       ├── unnamed-chunk-24-1.png <br>
+    │   │       ├── unnamed-chunk-29-1.png <br>
+    │   │       └── unnamed-chunk-30-1.png <br>
+    │   ├── daur2_lesson_6_exercise_rnaseq.Rmd <br>
+    │   ├── daur2_lesson_6_exercise_rnaseq.html <br>
+    │   ├── daur2_lesson_6_exercise_rnaseq_student_version.Rmd <br>
+    │   └── daur2_lesson_6_exercise_rnaseq_student_version.html <br>
+    ├── les1.Rmd <br>
+    ├── les1.nb.html <br>
+    ├── les2.Rmd <br>
+    ├── les2.nb.html <br>
+    ├── les3.Rmd <br>
+    └── resources.Rmd <br>
+<br>
+</div>
+</div>
+
+ <br>
+  <br>
+In order to have the folder structured in the Guerrilla analytics framework method, I retroactively moved the files.
+This is just used as an example to show what a tidier and better organized structure might look like.
+The big problem with this is that it <b>will </b> break many, if not all, of the scripts inside due to changing of file paths.
+
+The best way to keep files well-managed is to set up a file structure before starting and sticking to it. Keeping a folder with all the raw data with its names the way they were obtained makes sure confusion is kept to a minimum when the data is looked at. Creating seperate data folders enables to track transformed data while preserving the raw data.
+
+And keeping metadata files in all the folders that explain not just folder structure, but importantly also file naming conventions and potentially used abbreviations for them will mean that even years later someone will be able to look at the project and learn what is inside.
+
+This portfolio was made with the Guerrilla analytics framework in mind from the start:
+```{r, echo=FALSE}
+# fs::dir_tree(here::here()) 
+# /Users/Alex/Documents/DSFB26V23/dsfb2_workflows_portfolio 
+# /Users/Alex/Documents/daur2/daurII_students_OLD 
+```

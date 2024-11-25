@@ -1,0 +1,25 @@
+﻿Experiment,DV,Comparison,Tested Mean,Tested SD,Tested n,Control Mean,Control SD,Control n,d,SEM
+Experiment 1,ARC,Always-Tested,0.6408,0.5059,40,0.001,0.8272,40,0.933147605,0.235461839
+Experiment 2,ARC,Always-Tested,0.3534,0.4951,41,0.0612,0.6583,42,0.500821853,0.22295907
+Experiment 3,ARC,Always-Tested,0.4008,0.4518,48,0.2085,0.6057,47,0.360449467,0.206866475
+Experiment 4,ARC,Always-Tested,0.4459,0.524,133,0.1749,0.4637,131,0.547475678,0.125379642
+Experiment 1,ARC,Early-Tested,0.3862,0.6847,40,0.001,0.8272,40,0.507309155,0.227175078
+Experiment 2,ARC,Early-Tested,0.1207,0.7001,42,0.0612,0.6583,42,8.76E-02,0.218322433
+Experiment 3,ARC,Early-Tested,0.456,0.4408,48,0.2085,0.6057,47,0.46801462,0.207997017
+Experiment 4,ARC,Early-Tested,0.3222,0.5652,128,0.1749,0.4637,131,0.285267601,0.124912719
+Experiment 1,Correct Recall,Always-Tested,0.718,0.222,40,0.51,0.261,40,0.858489596,0.233679861
+Experiment 2,Correct Recall,Always-Tested,0.615,0.252,41,0.422,0.28,40,0.725042922,0.229423684
+Experiment 3,Correct Recall,Always-Tested,0.617,0.227,48,0.349,0.28,47,1.052640736,0.218956124
+Experiment 4,Correct Recall,Always-Tested,0.607,0.265,133,0.323,0.256,131,1.089904836,0.131917327
+Experiment 1,Correct Recall,Early-Tested,0.51,0.261,40,0.357,0.24,40,0.610242591,0.228751995
+Experiment 2,Correct Recall,Early-Tested,0.459,0.296,42,0.422,0.28,40,0.128333665,0.221155935
+Experiment 3,Correct Recall,Early-Tested,0.501,0.293,47,0.349,0.28,47,0.530404523,0.209880018
+Experiment 4,Correct Recall,Early-Tested,0.462,0.262,128,0.323,0.256,131,0.536716103,0.126499787
+Experiment 1,Intrusions,Always-Tested,0.25,0.63,40,1.6,1.78,40,1.011115404,0.237465186
+Experiment 2,Intrusions,Always-Tested,0.341,0.656,41,1.762,2.912,42,0.66951422,0.225610427
+Experiment 3,Intrusions,Always-Tested,0.54,0.849,48,2.277,2.811,47,0.840332114,0.214071368
+Experiment 4,Intrusions,Always-Tested,0.451,0.783,133,1.649,1.767,131,0.878862402,0.128900201
+Experiment 1,Intrusions,Early-Tested,1.45,1.68,40,1.6,1.78,40,8.67E-02,0.22371175
+Experiment 2,Intrusions,Early-Tested,1.452,2.276,42,1.762,2.912,42,0.118618551,0.218409706
+Experiment 3,Intrusions,Early-Tested,1.021,1.313,48,2.277,2.811,47,0.574503187,0.209396884
+Experiment 4,Intrusions,Early-Tested,1.165,1.484,127,1.649,1.767,131,0.296233133,0.125210501
