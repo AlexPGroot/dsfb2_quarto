@@ -1,0 +1,106 @@
+---
+title: "Projects"
+page-layout: full
+title-block-banner: true
+listing:
+  - id: projects
+    template: projects.ejs
+    categories: true
+    sort-ui: false
+    sort: "date desc"
+    filter-ui: true
+    max-description-length: 300
+    page-size: 6
+    fields: [href, thumbnail, title, description, categories]
+    contents:
+      - category: "R Projects"
+        description: "Projects related to R programming."
+        tiles:
+          - href: /003_Guerrilla_analytics_framework.qmd
+            thumbnail: /images/projects/003_Guerrilla_analytics_framework.png
+            title: "Guerilla Analytics Framework"
+            description: "Descr"
+            date: "2024-11-15"
+            categories: [R]
+          - href: /004_C_elegans.qmd
+            thumbnail: /images/projects/rlogo.png
+            title: "C elegans analysis"
+            description: "Descr"
+            date: "2024-11-24"
+            categories: [R]
+          - href: /005_open_peer_review.qmd
+            thumbnail: /images/projects/rlogo.png
+            title: "Open peer review"
+            description: "Descr"
+            date: "2024-11-15"
+            categories: [R]
+          - href: /006_relational_databases.qmd
+            thumbnail: /images/projects/006_relational_databases.png
+            title: "SQL, Relational Databases"
+            description: "Descr"
+            date: "2024-11-24"
+            categories: [R]
+          - href: /007_R_Package.qmd
+            thumbnail: /images/projects/007_R_Package.png
+            title: "R Package"
+            description: "Descr"
+            date: "2024-11-15"
+            categories: [R]
+          - href: /008_Zotero.qmd
+            thumbnail: /images/projects/008_Zotero.png
+            title: "Zotero"
+            description: "Descr"
+            date: "2024-11-24"
+            categories: [R]
+          - href: /009_Parameterized_report.qmd
+            thumbnail: /images/projects/quartologo.png
+            title: "Parameterized report"
+            description: "Descr"
+            date: "2024-11-15"
+            categories: [R]
+          - href: /010_ML_Getting_started.qmd
+            thumbnail: /images/projects/010_ML_Getting_started.png
+            title: "Tidymodels Machine Learning"
+            description:
+            date: "2024-11-24"
+            categories: [R]
+          - href: https://github.com/AlexPGroot/Project_Nanopore
+            thumbnail: /images/projects/011_Project_Nanopore.png
+            title: "Project Nanopore"
+            description: "Descr"
+            date: "2024-11-24"
+            categories: [R]
+      - category: "Other Projects"
+        description: "Projects related to R programming."
+        tiles:
+          - href: /001_CV.qmd
+            thumbnail: /images/projects/rlogo.png
+            title: "CV"
+            description: "Description of project"
+            date: "2024-11-15"
+            categories: [R]
+          - href: /002_Looking_ahead.qmd
+            thumbnail: /images/projects/rlogo.png
+            title: "Looking Ahead"
+            description: "Descr"
+            date: "2024-11-24"
+            categories: [R]
+---
+
+```{r}
+#| echo: false
+#| eval: false
+categories:
+  R
+
+template:
+ - category: "R Projects"
+        description: "Projects related to R programming."
+        tiles:
+          - href: /001_CV.qmd
+            thumbnail: /images/projects/celegans.jpg
+            title: "title"
+            description: "Description of project"
+            date: "2024-11-15"
+            categories: [R, Py]
+```

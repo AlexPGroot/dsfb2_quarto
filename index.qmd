@@ -1,5 +1,6 @@
 ---
 title: "Index"
+title-block-banner: true
 ---
 
 ```{r}
