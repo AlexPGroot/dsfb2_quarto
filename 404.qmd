@@ -1,16 +1,33 @@
 ---
-title: "Page Not Found"
+title: "404"
 format:
-  html:
-    toc: false
+  html
 ---
 
- <style>
-body {
-  background-image: url('https://deep-image.ai/blog/content/images/2024/04/404-base.png');
-  background-repeat: repeat;
-}
-</style> 
+Return to <a href="/index.qmd"> Index </a>
 
-<br>
-Return to <a href="https://alexpgroot.github.io/index.html"> Index </a>
+```{r}
+#| echo: false
+#| warning: false
+library(ggplot2)
+
+# Coords
+number_data <- data.frame(
+  x = c(0, 0, 2, 2, 2, NA, # 4
+        5, 7, 7, 5, 5, NA, # 0
+        10, 10, 12, 12, 12), # 4
+  y = c(4, 2, 2, 4, 0, NA, # 4
+        0, 0, 4, 4, 0, NA,  # 0
+        4, 2, 2, 4, 0), # 4
+  group = rep(c("4", "0", "4"), times = c(6, 6, 5))
+)
+
+ggplot(number_data, aes(x, y, group = group)) +
+  geom_path(size = 2.5, color = "orange", lineend = "round") +  
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 18, face = "bold", hjust = 0.5)
+  ) +
+  labs(title = "Page not found")
+```
+
