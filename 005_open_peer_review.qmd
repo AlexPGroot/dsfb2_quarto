@@ -1,4 +1,15 @@
-# Open peer review
+---
+title: "Open peer review"
+format:
+  html:
+    other-links: 
+      - text: Reproducibility and reporting practices in COVID-19 preprint manuscripts
+        icon: file-earmark-text
+        href: https://www.researchgate.net/publication/340244621_Reproducibility_and_reporting_practices_in_COVID-19_preprint_manuscripts
+      - text: Does retrieval potentiate new learning when retrieval stops but new learning continues?
+        icon: file-earmark-text
+        href: https://doi.org/10.1016/j.jml.2020.104150
+---
 
 ***Write an Rmarkdown report on your findings, including the table above and some information about the article such as general aim, short methods and results. If data is available, try including some***
 
