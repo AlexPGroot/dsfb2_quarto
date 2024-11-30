@@ -1,4 +1,12 @@
-# Guerrilla analytics
+---
+title: "Guerrilla analytics"
+format:
+  html:
+    other-links: 
+      - text: Guerrilla analytics book
+        icon: book
+        href: https://www.sciencedirect.com/book/9780128002186/guerrilla-analytics
+---
 Guerrilla Analytics is data analytics performed in a very dynamic project environment that presents the team with varied and frequent disruptions and constrains the team in terms of the resources they can bring to bear on their analytics problem. <br>
 From: <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780128002186000011">Guerrilla Analytics, 2015</a>
 

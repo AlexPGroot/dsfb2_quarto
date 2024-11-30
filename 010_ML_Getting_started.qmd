@@ -1,6 +1,4 @@
 ---
-output: 
-  html_document
 editor_options: 
   chunk_output_type: console
   markdown: 
@@ -65,8 +63,8 @@ data_tbl <- stats::setNames(data_raw, data_names)
 head(data_tbl) %>%
   kableExtra::kbl()
 # # TODO # create concat list
-summary(data_tbl)
-sum(is.na(data_tbl))
+summary(data_tbl) # summarize dataset
+sum(is.na(data_tbl)) # check for NA values
 
 # Change chr to factor
 data_cols <- colnames(data_tbl[c("Class", "menopause", "node_caps", "breast", "breast_quad", "irradiat")])

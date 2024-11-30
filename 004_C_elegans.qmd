@@ -1,6 +1,12 @@
-# C elegans
+---
+title: C elegans
+execute:
+  message: false
+  warning: false
+---
 
 ```{r elegans library}
+#| echo: false
 library(here)
 library(readxl)
 library(tidyverse)

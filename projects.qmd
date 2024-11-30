@@ -12,7 +12,7 @@ listing:
     max-description-length: 300
     page-size: 6
     fields: [href, thumbnail, title, description, categories]
-    contents:
+    contents: 
       - category: "R Projects"
         description: "Projects related to R programming."
         tiles:
@@ -78,13 +78,13 @@ listing:
             title: "CV"
             description: "Description of project"
             date: "2024-11-15"
-            categories: [R]
+            categories: [general, Py]
           - href: /002_Looking_ahead.qmd
             thumbnail: /images/projects/rlogo.png
             title: "Looking Ahead"
             description: "Descr"
             date: "2024-11-24"
-            categories: [R]
+            categories: [general]
 ---
 
 ```{r}
