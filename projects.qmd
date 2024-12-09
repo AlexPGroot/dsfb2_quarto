@@ -40,7 +40,7 @@ listing:
             description: "Descr"
             date: "2024-11-24"
             categories: [R]
-          - href: /007_R_Package.qmd
+          - href: https://github.com/AlexPGroot/mytoolkitr
             thumbnail: /images/projects/007_R_Package.png
             title: "R Package"
             description: "Descr"
