@@ -1,1 +1,33 @@
-# Zotero
+---
+title: "Developing an automated workflow to analyze differential gene expression in cells through long-read Nanopore RNA sequencing"
+bibliography: references/008_nanopore.bib
+bibliographystyle: apa
+author:
+  - name: "Alex Groot"
+    affiliation: "Hogeschool Utrecht"
+    email: "alex_groot@icloud.com"
+date: "2024-12-08"
+format:
+  html:
+    journal: elsevier
+    toc: true
+    css: css/008_Zotero.css
+---
+```{r}
+#| eval: false
+rbbt::bbt_update_bib(path_rmd = "008_Zotero.qmd", path_bib = "references/008_nanopore.bib")
+```
+
+
+# Introduction
+the ~20 (μm) 
+
+## RNA-sequencing
+RNA sequencing (RNA-Seq) technology has, since its inception shortly after next-generation sequencing (NGS), made large advancements in our ability to study the transcriptome. [@weberDiscoveringNewBiology2015] Long-read RNA-Sequencing technology, such as the Nanopore MinION, enables us to analyze full-length transcripts over short read RNA-Seq data. While very potent, short-read RNA-Seq has its drawbacks due to its short nature, such as when high amounts of repeating sequences are involved and the challenges in overlapping regions.   [@vandijkThirdRevolutionSequencing2018] 
+With this we can analyze the effects of the exposure of human cells to environmental contaminants, such as microplastics (MPs).
+
+## Microplastics
+Over the past decade we have gone from detecting and identifying MPs in marine habitats and oceans worldwide  [@thompsonLostSeaWhere2004] to analyzing human samples and finding them in large groups of people everywhere such as in testicles [@zhaoDetectionCharacterizationMicroplastics2023], breastmilk [@saraluckDetectionMicroplasticsHuman2024], placenta [@ragusaPlasticentaFirstEvidence2021] and respiratory systems [@amato-lourencoPresenceAirborneMicroplastics2021]. Since then there has been increasingly more research regarding the topic as evidenced by numerous publications exploring the many routes of exposure and their pathways of MP toxicity. And while it is observed that high concentrations of MPs can cause inflammatory lesions, and may be a factor in the increasing incidence of neurodegenerative diseases, immune disorders and cancers    [@prataEnvironmentalExposureMicroplastics2020], the interactions and long-term effects require more studies as they are not yet fully understood.
+
+## Aim of this project
+In order to better understand the biological effect of MPs we aim to utilize long-read RNA-Seq analyses, facilitated by the Oxford Nanopore MinION, to explore the impact on human gene expression to analyze potential downstream health issues. By developing an automated data science workflow which makes use of minimap2, bambu and DESeq2 for discovery, quantification and differential gene expression we aim to provide a workflow that serves as a foundation for our research and a potential foundation for more reproducible data analyses in the future.
