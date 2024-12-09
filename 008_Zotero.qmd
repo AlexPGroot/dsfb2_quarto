@@ -14,12 +14,12 @@ format:
     css: css/008_Zotero.css
 ---
 ```{r}
+#| eval: false
+#| echo: false
 rbbt::bbt_update_bib(path_rmd = "008_Zotero.qmd", path_bib = "references/008_nanopore.bib")
 ```
-
-
 # Introduction
-the ~20 (μm) 
+
 
 ## RNA-sequencing
 RNA sequencing (RNA-Seq) technology has, since its inception shortly after next-generation sequencing (NGS), made large advancements in our ability to study the transcriptome [@weberDiscoveringNewBiology2015]. Long-read RNA-Sequencing technology, such as the Nanopore MinION, enables us to analyze full-length transcripts over short read RNA-Seq data. While very potent, short-read RNA-Seq has its drawbacks due to its short nature, such as when high amounts of repeating sequences are involved and the challenges in overlapping regions   [@vandijkThirdRevolutionSequencing2018]. As full-length isoforms are lost due to the fragmenting nature of short-read RNA-Seq, we can instead turn to long-read RNA-Seq. While this technology can suffer from lower throughput and accuracy, it does allow us to directly sequence native RNA sequences.  [@amentLongreadRNASequencing2024].
@@ -30,3 +30,6 @@ Over the past decade we have gone from detecting and identifying MPs in marine h
 
 ## Aim of this project
 In order to better understand the biological effect of MPs we aim to utilize long-read RNA-Seq analyses, facilitated by the Oxford Nanopore MinION, to explore the impact on human gene expression to analyze potential downstream health issues. By developing an automated data science workflow which makes use of minimap2, bambu and DESeq2 for discovery, quantification and differential gene expression we aim to provide a workflow that serves as a foundation for our research and a potential foundation for more reproducible data analyses in the future.
+
+
+the ~20 (μm) 
