@@ -1,1 +1,251 @@
-# Parameterized report
+---
+title: Parameterized report
+navbar: false
+format: 
+  dashboard:
+    theme: united
+    orientation: rows
+    scrolling: true
+params:
+  country: AUT
+  year: null
+  period: null
+---
+
+
+```{r}
+#| echo: false
+library(here)
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+library(kableExtra)
+
+# should contain
+# params: country, year, period in month
+# one graph for covid-19 cases
+# one graph for covid-19 related deaths
+```
+
+```{r}
+# load raw data
+raw_data <- read.csv(here::here("data_raw/data_0090/data.csv"),na.strings = "", fileEncoding = "UTF-8-BOM")
+```
+
+```{r}
+# load parameters
+# if param = null, param = TRUE, else param = input
+# TRUE prints all params, input prints input params
+country_parameter <- if (is.null(params$country)) {
+  TRUE
+} else {
+  raw_data$countryterritoryCode == params$country
+}
+
+year_parameter <- if (is.null(params$year)) {
+  TRUE
+} else {
+  raw_data$year == params$year
+}
+
+month_parameter <- if (is.null(params$period)) {
+  TRUE
+} else {
+  raw_data$month %in% params$period
+}
+
+```
+
+```{r}
+# use all data or filter by specified params
+data_fil <- raw_data %>%
+  filter(country_parameter, year_parameter, month_parameter) %>%
+  mutate(monthName = month.abb[month])
+```
+
+```{r}
+data_long <- data_fil %>%
+  pivot_longer(
+    cols = c(cases, deaths), 
+    names_to = "type", 
+    values_to = "count"
+  ) %>%
+  mutate(
+    full_date = lubridate::dmy(dateRep) # Convert dateRep to Date object
+  )
+
+```
+
+# Report
+
+## Row {height="60%"}
+
+```{r}
+#| column: screen
+#| out-width: 100%
+
+p1 <- ggplot(data_long, aes(x = full_date)) +
+  geom_col(aes(y = count, color = type), data = filter(data_long, type == "cases"), size = 0.1) +
+  geom_line(aes(y = count, color = type), data = filter(data_long, type == "deaths"), size = 0.1, linetype = "solid") +
+  scale_x_date(date_labels = "%d-%b-%Y", date_breaks = "1 month") +
+  scale_color_manual(
+    values = c("cases" = "blue", "deaths" = "red"),
+    labels = c("Cases", "Deaths")
+  ) +
+  labs(
+    x = "Date",
+    y = "Count",
+    title = "COVID-19 Cases and Deaths Over Time",
+    color = "Type",
+    fill = "Type"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "top"
+  )
+
+plotly::ggplotly(p1) %>% plotly::layout(
+    hovermode = "x", # Align tooltips along the x-axis
+    spikedistance = -1, # Display spike lines for all values at cursor
+    xaxis = list(
+      showspikes = TRUE, # Enable vertical spike
+      spikemode = "across", # Spike lines across all traces
+      spikesnap = "cursor", # Spike snaps to the cursor
+      spikethickness = 1, # Change spike thickness to 1
+      showline = TRUE, # Display axis line
+      showgrid = TRUE  # Display grid lines
+    )
+  )
+```
+
+## Row 2
+```{r}
+fil_most_cases <- data_fil[which.max(data_fil$cases),]
+fil_most_deaths <- data_fil[which.max(data_fil$deaths),]
+```
+
+::: {.valuebox icon="virus" color="blue"}
+Day with most cases
+<br> Cases:
+`r fil_most_cases$cases`
+<br> Deaths:
+`r fil_most_cases$deaths`
+<br> Date:
+`r fil_most_cases$dateRep`
+:::
+
+::: {.valuebox icon="exclamation-triangle" color="red"}
+Day with most deaths
+<br> Cases:
+`r fil_most_deaths$cases`
+<br> Deaths:
+`r fil_most_deaths$deaths`
+<br> Date:
+`r fil_most_deaths$dateRep`
+:::
+## Row 3
+
+### Column 1
+
+```{r}
+p2 <- data_long %>% filter(type == "cases") %>%
+  ggplot(aes(x = full_date, y = count)) +
+  geom_col(fill = "blue") +
+  scale_x_date(date_labels = "%d-%b-%Y", date_breaks = "3 month") +
+  labs(
+    x = "Date",
+    y = "Count",
+    title = "COVID-19 Cases Over Time",
+    color = "Type",
+    fill = "Type"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "top"
+  )
+
+plotly::ggplotly(p2) %>% plotly::layout(
+    hovermode = "x", # Align tooltips along the x-axis
+    spikedistance = -1, # Display spike lines for all values at cursor
+    xaxis = list(
+      showspikes = TRUE, # Enable vertical spike
+      spikemode = "across", # Spike lines across all traces
+      spikesnap = "cursor", # Spike snaps to the cursor
+      spikethickness = 1, # Change spike thickness to 1
+      showline = TRUE, # Display axis line
+      showgrid = TRUE  # Display grid lines
+    )
+  )
+```
+
+### Column 2
+
+```{r}
+p3 <- data_long %>% filter(type == "deaths") %>%
+  ggplot(aes(x = full_date, y = count)) +
+  geom_col(fill = "red") +
+  scale_x_date(date_labels = "%d-%b-%Y", date_breaks = "3 month") +
+  labs(
+    x = "Date",
+    y = "Count",
+    title = "COVID-19 Deaths Over Time",
+    color = "Type",
+    fill = "Type"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "top"
+  )
+
+plotly::ggplotly(p3) %>% plotly::layout(
+    hovermode = "x", # Align tooltips along the x-axis
+    spikedistance = -1, # Display spike lines for all values at cursor
+    xaxis = list(
+      showspikes = TRUE, # Enable vertical spike
+      spikemode = "across", # Spike lines across all traces
+      spikesnap = "cursor", # Spike snaps to the cursor
+      spikethickness = 1, # Change spike thickness to 1
+      showline = TRUE, # Display axis line
+      showgrid = TRUE  # Display grid lines
+    )
+  )
+```
+
+
+### column
+
+# Data table
+
+Data table using set parameters:
+
+```{r}
+# return user parameter or unspecified if defaulted to null
+return_if_null <- function(input) {
+  if (is.null(input) || input == "null") {
+    return("unspecified")
+  } else {
+    return(input)
+  }
+}
+```
+
+`r return_if_null(params$country)`, `r return_if_null(params$year)`, `r return_if_null(params$period)`
+
+## row
+
+```{r}
+#| eval: true
+data_fil %>% kableExtra::kbl() %>%
+  kableExtra::kable_paper(bootstrap_options = c("hover", "condensed", "responsive", position = "left")) %>%
+  kableExtra::scroll_box(height = "900px")
+```
+
+# About
+
+```{r}
+
+```
+
