@@ -215,13 +215,8 @@ plotly::ggplotly(p3) %>% plotly::layout(
 ```
 
 
-### column
-
-# Data table
-
-Data table using set parameters:
-
 ```{r}
+#| echo: false
 # return user parameter or unspecified if defaulted to null
 return_if_null <- function(input) {
   if (is.null(input) || input == "null") {
@@ -232,20 +227,53 @@ return_if_null <- function(input) {
 }
 ```
 
-`r return_if_null(params$country)`, `r return_if_null(params$year)`, `r return_if_null(params$period)`
+### column
+
+# Data table
 
 ## row
 
 ```{r}
-#| eval: true
+#| eval: false
 data_fil %>% kableExtra::kbl() %>%
   kableExtra::kable_paper(bootstrap_options = c("hover", "condensed", "responsive", position = "left")) %>%
-  kableExtra::scroll_box(height = "900px")
+  kableExtra::scroll_box(height = "900px") 
 ```
+
+```{r}
+#| eval: true
+data_fil %>% gt::gt() %>% gt::opt_interactive(use_search = TRUE,
+                                              use_filters = TRUE,
+                                              use_page_size_select = TRUE)
+
+```
+
+
+```{r}
+#| eval: false
+data_fil %>% DT::datatable(height = "900px",
+                           fillContainer = TRUE)
+```
+
+## row
+
+<pre>
+Data table using set parameters:
+`r return_if_null(params$country)`, `r return_if_null(params$year)`, `r return_if_null(params$period)`
+</pre>
 
 # About
 
-```{r}
+<br> This page was rendered using the following parameters:
+<br> `r paste0(c("Country: " ,return_if_null(params$country)))`
+<br> `r paste0(c("Year: " ,return_if_null(params$year)))`
+<br> `r paste0(c("Period: " ,return_if_null(params$period)))`
+<br><br> This report can be rendered using the following script: <a href="scripts/009_Parameterized_report.R">scripts/009_Parameterized_report.R</a>
+<br> Data used: <a href="data_raw/data_0090/data.csv">data_raw/data_0090/data.csv</a>
+<br> Data available from: <a href="https://www.ecdc.europa.eu/en/publications-data/data-daily-new-cases-covid-19-eueea-country">ECDC</a>
+<br><br>available parameters are:
+<br> Country: `r raw_data$countryterritoryCode %>% unique()`
+<br> Year: `r raw_data$year %>% unique()`
+<br> Period: `r raw_data$month %>% unique()`
 
-```
 
