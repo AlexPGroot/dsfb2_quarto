@@ -8,8 +8,8 @@ format:
     scrolling: true
 params:
   country: AUT
-  year: null
-  period: null
+  year: NULL
+  period: NULL
 ---
 
 
@@ -29,7 +29,7 @@ library(kableExtra)
 
 ```{r}
 # load raw data
-raw_data <- read.csv(here::here("data_raw/data_0090/data.csv"),na.strings = "", fileEncoding = "UTF-8-BOM")
+raw_data_0090 <- read.csv(here::here("data_raw/data_0090/data.csv"),na.strings = "", fileEncoding = "UTF-8-BOM")
 ```
 
 ```{r}
@@ -39,26 +39,39 @@ raw_data <- read.csv(here::here("data_raw/data_0090/data.csv"),na.strings = "", 
 country_parameter <- if (is.null(params$country)) {
   TRUE
 } else {
-  raw_data$countryterritoryCode == params$country
+  raw_data_0090$countryterritoryCode == params$country
 }
 
 year_parameter <- if (is.null(params$year)) {
   TRUE
-} else {
-  raw_data$year == params$year
+} else if (!is.numeric(params$year)){
+  a_year <- params$year
+  b_year <- a_year %>% strsplit(":") %>% unlist() %>% as.numeric()
+  c_year <- seq(b_year[1], b_year[2])
+  raw_data_0090$year %in% c_year
+  } else {
+  raw_data_0090$year %in% params$year
 }
 
+# Note regarding Quarto parameterized reports:
+# Because Quarto's utilization of yaml for parameters, it is not possible to use r objects as input
+# Therefore a period input of 1:8 will be read as "1:8" of chr class, we turn it back into a sequence here:
 month_parameter <- if (is.null(params$period)) {
   TRUE
+} else if (!is.numeric(params$period)) {
+  a_period <- params$period
+  b_period <- a_period %>% strsplit(":") %>% unlist() %>% as.numeric()
+  c_period <- seq(b_period[1], b_period[2])
+  raw_data_0090$month %in% c_period
 } else {
-  raw_data$month %in% params$period
+  raw_data_0090$month %in% params$period
 }
 
 ```
 
 ```{r}
 # use all data or filter by specified params
-data_fil <- raw_data %>%
+data_fil <- raw_data_0090 %>%
   filter(country_parameter, year_parameter, month_parameter) %>%
   mutate(monthName = month.abb[month])
 ```
@@ -84,21 +97,25 @@ data_long <- data_fil %>%
 #| column: screen
 #| out-width: 100%
 
+# extract country name
+country_name_plot <- raw_data_0090 %>% filter(countryterritoryCode == params$country) %>% select(countriesAndTerritories) %>% unique() %>% pull()
+
 p1 <- ggplot(data_long, aes(x = full_date)) +
-  geom_col(aes(y = count, color = type), data = filter(data_long, type == "cases"), size = 0.1) +
+  geom_col(aes(y = count, fill = type), data = filter(data_long, type == "cases"), size = 0.1) +
   geom_line(aes(y = count, color = type), data = filter(data_long, type == "deaths"), size = 0.1, linetype = "solid") +
   scale_x_date(date_labels = "%d-%b-%Y", date_breaks = "1 month") +
+  scale_fill_manual(
+    values = c("cases" = "darkblue"),
+    labels = "Cases") +
   scale_color_manual(
-    values = c("cases" = "blue", "deaths" = "red"),
-    labels = c("Cases", "Deaths")
-  ) +
+    values = c("deaths" = "darkred"),
+    labels = "Deaths") +
   labs(
     x = "Date",
     y = "Count",
-    title = "COVID-19 Cases and Deaths Over Time",
-    color = "Type",
-    fill = "Type"
-  ) +
+    title = paste0("COVID-19 Cases and Deaths Over Time in ", country_name_plot),
+    color = NULL,
+    fill = NULL) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
@@ -112,11 +129,10 @@ plotly::ggplotly(p1) %>% plotly::layout(
       showspikes = TRUE, # Enable vertical spike
       spikemode = "across", # Spike lines across all traces
       spikesnap = "cursor", # Spike snaps to the cursor
-      spikethickness = 1, # Change spike thickness to 1
-      showline = TRUE, # Display axis line
-      showgrid = TRUE  # Display grid lines
-    )
-  )
+      spikethickness = 1,
+      showline = TRUE, # axis line
+      showgrid = TRUE  # grid lines
+    ))
 ```
 
 ## Row 2
@@ -156,7 +172,7 @@ p2 <- data_long %>% filter(type == "cases") %>%
   labs(
     x = "Date",
     y = "Count",
-    title = "COVID-19 Cases Over Time",
+    title = paste0("COVID-19 Cases Over Time in ", country_name_plot),
     color = "Type",
     fill = "Type"
   ) +
@@ -173,9 +189,9 @@ plotly::ggplotly(p2) %>% plotly::layout(
       showspikes = TRUE, # Enable vertical spike
       spikemode = "across", # Spike lines across all traces
       spikesnap = "cursor", # Spike snaps to the cursor
-      spikethickness = 1, # Change spike thickness to 1
-      showline = TRUE, # Display axis line
-      showgrid = TRUE  # Display grid lines
+      spikethickness = 1, 
+      showline = TRUE, # axis line
+      showgrid = TRUE  # grid lines
     )
   )
 ```
@@ -190,7 +206,7 @@ p3 <- data_long %>% filter(type == "deaths") %>%
   labs(
     x = "Date",
     y = "Count",
-    title = "COVID-19 Deaths Over Time",
+    title = paste0("COVID-19 Deaths Over Time in ", country_name_plot),
     color = "Type",
     fill = "Type"
   ) +
@@ -207,9 +223,9 @@ plotly::ggplotly(p3) %>% plotly::layout(
       showspikes = TRUE, # Enable vertical spike
       spikemode = "across", # Spike lines across all traces
       spikesnap = "cursor", # Spike snaps to the cursor
-      spikethickness = 1, # Change spike thickness to 1
-      showline = TRUE, # Display axis line
-      showgrid = TRUE  # Display grid lines
+      spikethickness = 1, 
+      showline = TRUE, # axis line
+      showgrid = TRUE  # grid lines
     )
   )
 ```
@@ -219,7 +235,7 @@ plotly::ggplotly(p3) %>% plotly::layout(
 #| echo: false
 # return user parameter or unspecified if defaulted to null
 return_if_null <- function(input) {
-  if (is.null(input) || input == "null") {
+  if (is.null(input) || any(input == "null")) {
     return("unspecified")
   } else {
     return(input)
@@ -272,8 +288,8 @@ Data table using set parameters:
 <br> Data used: <a href="data_raw/data_0090/data.csv">data_raw/data_0090/data.csv</a>
 <br> Data available from: <a href="https://www.ecdc.europa.eu/en/publications-data/data-daily-new-cases-covid-19-eueea-country">ECDC</a>
 <br><br>available parameters are:
-<br> Country: `r raw_data$countryterritoryCode %>% unique()`
-<br> Year: `r raw_data$year %>% unique()`
-<br> Period: `r raw_data$month %>% unique()`
+<br> Country: `r raw_data_0090$countryterritoryCode %>% unique()`
+<br> Year: `r raw_data_0090$year %>% unique()`
+<br> Period: `r raw_data_0090$month %>% unique()`
 
 
