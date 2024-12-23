@@ -284,9 +284,9 @@ Data table using set parameters:
 <br> `r paste0(c("Country: " ,return_if_null(params$country)))`
 <br> `r paste0(c("Year: " ,return_if_null(params$year)))`
 <br> `r paste0(c("Period: " ,return_if_null(params$period)))`
-<br><br> This report can be rendered using the following script: <a href="scripts/009_Parameterized_report.R">scripts/009_Parameterized_report.R</a>
-<br> Data used: <a href="data_raw/data_0090/data.csv">data_raw/data_0090/data.csv</a>
-<br> Data available from: <a href="https://www.ecdc.europa.eu/en/publications-data/data-daily-new-cases-covid-19-eueea-country">ECDC</a>
+<br><br> This report can be rendered using the following script: <a href="scripts/009_Parameterized_report.R" target="_blank">scripts/009_Parameterized_report.R</a>
+<br> Download Data used: <a href="data_raw/data_0090/data.csv" target="_blank">data_raw/data_0090/data.csv</a>
+<br> Data available from: <a href="https://www.ecdc.europa.eu/en/publications-data/data-daily-new-cases-covid-19-eueea-country" target="_blank">ECDC</a>, latest update at time of download: 2022-10-27
 <br><br>available parameters are:
 <br> Country: `r raw_data_0090$countryterritoryCode %>% unique()`
 <br> Year: `r raw_data_0090$year %>% unique()`

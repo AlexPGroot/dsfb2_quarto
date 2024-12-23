@@ -16,6 +16,12 @@ listing:
       - category: "R Projects"
         description: "Projects related to R programming."
         tiles:
+          - href: https://alexpgroot.shinyapps.io/dsfb2_deploy/
+            thumbnail: /images/projects/rshiny.png
+            title: "R Shiny app"
+            description: "Descr"
+            date: "2024-12-23"
+            categories: [R]
           - href: /003_Guerrilla_analytics_framework.qmd
             thumbnail: /images/projects/003_Guerrilla_analytics_framework.png
             title: "Guerilla Analytics Framework"
