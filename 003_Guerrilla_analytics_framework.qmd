@@ -10,7 +10,7 @@ format:
 Guerrilla Analytics is data analytics performed in a very dynamic project environment that presents the team with varied and frequent disruptions and constrains the team in terms of the resources they can bring to bear on their analytics problem. <br>
 From: <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780128002186000011">Guerrilla Analytics, 2015</a>
 
-<br>Data science projects can get big, and keeping all files and folders tidy makes sure that it will stay possible to go through all the files and see how the analyses are performed. Keeping a well managed structure also allows for easier reproduction of the performed analyses when the folders are sent to other data scientist.
+Data science projects can get big, and keeping all files and folders tidy makes sure that it will stay possible to go through all the files and see how the analyses are performed. Keeping a well managed structure also allows for easier reproduction of the performed analyses when the folders are sent to other data scientist.
 <br>
 <br>First we take a look at what a general folder structure might look like after a few weeks of assignments:
 
@@ -19,15 +19,14 @@ From: <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780128002
 {
   height: 700px;
   padding: 3px; 
-  background: rgba(0, 0, 0, .1);
-  /* background: #fafafa; */
+  background: rgba(0, 0, 0, .05);
 }
 .Content
 {
   height: 624px;
   overflow: scroll;
-  background: rgba(0, 0, 0, .1);
-  /*background: #fafafa;*/
+  margin: 4px;
+  background: rgba(0, 0, 0, .05);
 }
 ::-webkit-scrollbar {
   -webkit-appearance: none;
@@ -40,6 +39,8 @@ From: <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780128002
   box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 ```
+
+:::{.card}
 
 <div class="FixedHeightContainer">
   <h3>Old folder structure:</h3>
@@ -408,6 +409,8 @@ From: <a href="https://www.sciencedirect.com/science/article/abs/pii/B9780128002
 </div>
 </div>
 
+:::
+
 <br>
 <br>
 As you can see, the original file structure used during the earlier data science course is quite the mess.
@@ -418,6 +421,9 @@ Making sure all files in a environment pertain only to that single project is im
 <br>
 <br>Here is the above file structure, with the guerilla analytics framework <b>retroactively </b>applied:
 <br>
+
+:::{.card}
+
 <div class="FixedHeightContainer">
   <h3>New folder structure:</h3>
   <div class="Content">
@@ -575,6 +581,8 @@ Making sure all files in a environment pertain only to that single project is im
 </div>
 </div>
 
+:::
+
  <br>
   <br>
 In order to have the folder structured in the Guerrilla analytics framework method, I retroactively moved the files.
@@ -588,6 +596,100 @@ And keeping metadata files in all the folders that explain not just folder struc
 This portfolio was made with the Guerrilla analytics framework in mind from the start:
 ```{r, echo=FALSE}
 # fs::dir_tree(here::here()) 
-# /Users/Alex/Documents/DSFB26V23/dsfb2_workflows_portfolio 
-# /Users/Alex/Documents/daur2/daurII_students_OLD 
 ```
+::: {.card}
+<div class="FixedHeightContainer">
+  <h3>Old folder structure:</h3>
+  <div class="Content">
+  <pre>
+/home/alexgroot/dsfb2_quarto
+├── 001_CV.qmd
+├── 002_Looking_ahead.qmd
+├── 003_Guerrilla_analytics_framework.qmd
+├── 004_C_elegans.qmd
+├── 005_open_peer_review.qmd
+├── 006_relational_databases.qmd
+├── 007_R_Package.qmd
+├── 008_Zotero.qmd
+├── 008_Zotero.quarto_ipynb
+├── 009_Parameterized_report.qmd
+├── 010_ML_Getting_started.qmd
+├── 404.qmd
+├── LICENSE
+├── _quarto.yml
+├── _site
+├── about.qmd
+├── css
+│   └── 008_Zotero.css
+├── data_output
+│   ├── data_00100
+│   └── data_0060
+│       ├── dengue.csv
+│       ├── dengue.rds
+│       ├── flu.csv
+│       ├── ...
+├── data_raw
+│   ├── data_00100
+│   │   ├── README
+│   │   ├── breast_cancer
+│   │   │   ├── Index
+│   │   │   ├── breast-cancer.data
+│   │   │   └── breast-cancer.names
+│   │   └── heart_failure.csv
+│   ├── data_0040
+│   │   ├── CE.LIQ.FLOW.062_Tidydata.xlsx
+│   │   └── README
+│   ├── data_0050
+│   │   ├── README
+│   │   ├── TMNT Combined Data OSF.csv
+│   │   ├── TMNT Meta-analysis OSF.csv
+│   │   ├── ...
+│   │   ├── osfstorage-archive
+│   │   │   ├── TMNT Combined Data OSF.csv
+│   │   │   ├── TMNT Meta-analysis OSF.csv
+│   │   │   ├── ...
+│   │   │   └── readme.txt
+│   │   ├── osfstorage-archive.zip
+│   │   └── readme.txt
+│   ├── data_0060
+│   │   ├── README
+│   │   ├── dengue_data.csv
+│   │   └── flu_data.csv
+│   └── data_0090
+│       └── data.csv
+├── dsfb2_quarto.Rproj
+├── images
+│   ├── data_00100
+│   │   ├── baseline_accuracy_model_performance.png
+│   │   └── baseline_precision_model_performance.png
+│   ├── data_0050
+│   │   └── original_plot.png
+│   └── projects
+│       ├── 003_Guerrilla_analytics_framework.png
+│       ├── 006_relational_databases.png
+│       ├── ...
+├── index.qmd
+├── projects.ejs
+├── projects.qmd
+├── references
+│   └── 008_nanopore.bib
+├── scripts
+│   └── 009_Parameterized_report.R
+└── styles.css
+  </pre>
+  </div>
+</div>
+:::
+
+<br>
+
+:::{.card}
+<br>
+<ul>
+  <li> All the required main files are in the root folder of the project, as required for the website to render, e.g.     the quarto documents, yml, and project files. </li>
+  <li> Next there are extra folders required by the rendered site; images, css, _site, references.</li>
+  <li> Then folders used for the R chunks and scripts; data_raw/output, scripts.</li>
+  <li> Finally Github related files such as .gitignore and LICENSE.</li>
+  <li> Structured systems as such make it easier to both find old files and place new ones. </li>
+</ul>
+:::
