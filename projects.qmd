@@ -5,13 +5,8 @@ title-block-banner: true
 listing:
   - id: projects
     template: projects.ejs
-    categories: true
-    sort-ui: false
-    sort: "date desc"
-    filter-ui: true
-    max-description-length: 300
     page-size: 6
-    fields: [href, thumbnail, title, description, categories]
+    fields: [href, thumbnail, title]
     contents: 
       - category: "R Projects"
         description: "Projects related to R programming."
@@ -19,51 +14,30 @@ listing:
           - href: https://github.com/AlexPGroot/Project_Nanopore
             thumbnail: /images/projects/011_Project_Nanopore.png
             title: "Project Nanopore"
-            description: "Descr"
-            date: "2024-11-24"
-            categories: [R]
             
           - href: https://alexpgroot.shinyapps.io/dsfb2_deploy/
             thumbnail: /images/projects/rshiny.png
             title: "Interactive R Shiny App Report"
-            description: "Descr"
-            date: "2024-12-23"
-            categories: [R]
             
           - href: /010_ML_Getting_started.qmd
             thumbnail: /images/projects/010_ML_Getting_started.png
             title: "Tidymodels Machine Learning"
-            description:
-            date: "2024-11-24"
-            categories: [R]
             
           - href: /009_Parameterized_report.qmd
             thumbnail: /images/projects/quartologo.png
             title: "Parameterized Report"
-            description: "Descr"
-            date: "2024-11-15"
-            categories: [R]
             
           - href: https://github.com/AlexPGroot/mytoolkitr
             thumbnail: /images/projects/007_R_Package.png
             title: "R Package"
-            description: "Descr"
-            date: "2024-11-15"
-            categories: [R]
             
           - href: /005_open_peer_review.qmd
             thumbnail: /images/projects/rlogo.png
             title: "Open Peer Review"
-            description: "Descr"
-            date: "2024-11-15"
-            categories: [R]
             
           - href: /004_C_elegans.qmd
             thumbnail: /images/projects/rlogo.png
             title: "C. elegans Analysis"
-            description: "Descr"
-            date: "2024-11-24"
-            categories: [R]
             
             
       - category: "General Projects"
@@ -72,30 +46,18 @@ listing:
           - href: /008_Zotero.qmd
             thumbnail: /images/projects/008_Zotero.png
             title: "RNA Seq Introduction"
-            description: "Descr"
-            date: "2024-11-24"
-            categories: [R]
-            
+
           - href: /003_Guerrilla_analytics_framework.qmd
             thumbnail: /images/projects/003_Guerrilla_analytics_framework.png
             title: "Guerilla Analytics Framework"
-            description: "Descr"
-            date: "2024-11-15"
-            categories: [general]
             
           - href: /002_Looking_ahead.qmd
             thumbnail: /images/projects/rlogo.png
             title: "Looking Ahead"
-            description: "Descr"
-            date: "2024-11-24"
-            categories: [general]
 
           - href: /001_CV.qmd
             thumbnail: /images/projects/rlogo.png
             title: "Curriculum Vitae"
-            description: "Description of project"
-            date: "2024-11-15"
-            categories: [general]
 ---
 
 ```{r}
@@ -112,15 +74,9 @@ template:
           - href: /001_CV.qmd
             thumbnail: /images/projects/celegans.jpg
             title: "title"
-            description: "Description of project"
-            date: "2024-11-15"
-            categories: [R, Py]
             
             
           - href: /006_relational_databases.qmd
             thumbnail: /images/projects/006_relational_databases.png
             title: "SQL, Relational Databases"
-            description: "Descr"
-            date: "2024-11-24"
-            categories: [R]
 ```
