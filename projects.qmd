@@ -18,84 +18,88 @@ listing:
         tiles:
           - href: https://alexpgroot.shinyapps.io/dsfb2_deploy/
             thumbnail: /images/projects/rshiny.png
-            title: "R Shiny app"
+            title: "Interactive R Shiny App Report"
             description: "Descr"
             date: "2024-12-23"
             categories: [R]
-          - href: /003_Guerrilla_analytics_framework.qmd
-            thumbnail: /images/projects/003_Guerrilla_analytics_framework.png
-            title: "Guerilla Analytics Framework"
-            description: "Descr"
-            date: "2024-11-15"
-            categories: [R]
+            
           - href: /004_C_elegans.qmd
             thumbnail: /images/projects/rlogo.png
-            title: "C elegans analysis"
+            title: "C. elegans Analysis"
             description: "Descr"
             date: "2024-11-24"
             categories: [R]
+            
           - href: /005_open_peer_review.qmd
             thumbnail: /images/projects/rlogo.png
-            title: "Open peer review"
+            title: "Open Peer Review"
             description: "Descr"
             date: "2024-11-15"
             categories: [R]
-          - href: /006_relational_databases.qmd
-            thumbnail: /images/projects/006_relational_databases.png
-            title: "SQL, Relational Databases"
-            description: "Descr"
-            date: "2024-11-24"
-            categories: [R]
+            
           - href: https://github.com/AlexPGroot/mytoolkitr
             thumbnail: /images/projects/007_R_Package.png
             title: "R Package"
             description: "Descr"
             date: "2024-11-15"
             categories: [R]
-          - href: /008_Zotero.qmd
-            thumbnail: /images/projects/008_Zotero.png
-            title: "Zotero"
-            description: "Descr"
-            date: "2024-11-24"
-            categories: [R]
+            
           - href: /009_Parameterized_report.qmd
             thumbnail: /images/projects/quartologo.png
-            title: "Parameterized report"
+            title: "Parameterized Report"
             description: "Descr"
             date: "2024-11-15"
             categories: [R]
+            
           - href: /010_ML_Getting_started.qmd
             thumbnail: /images/projects/010_ML_Getting_started.png
             title: "Tidymodels Machine Learning"
             description:
             date: "2024-11-24"
             categories: [R]
+            
           - href: https://github.com/AlexPGroot/Project_Nanopore
             thumbnail: /images/projects/011_Project_Nanopore.png
             title: "Project Nanopore"
             description: "Descr"
             date: "2024-11-24"
             categories: [R]
-      - category: "Other Projects"
-        description: "Projects related to R programming."
+      - category: "General Projects"
+        description: ""
         tiles:
           - href: /001_CV.qmd
             thumbnail: /images/projects/rlogo.png
-            title: "CV"
+            title: "Curriculum Vitae"
             description: "Description of project"
             date: "2024-11-15"
-            categories: [general, Py]
+            categories: [general]
+            
           - href: /002_Looking_ahead.qmd
             thumbnail: /images/projects/rlogo.png
             title: "Looking Ahead"
             description: "Descr"
             date: "2024-11-24"
             categories: [general]
+            
+          - href: /003_Guerrilla_analytics_framework.qmd
+            thumbnail: /images/projects/003_Guerrilla_analytics_framework.png
+            title: "Guerilla Analytics Framework"
+            description: "Descr"
+            date: "2024-11-15"
+            categories: [general]  
+            
+          - href: /008_Zotero.qmd
+            thumbnail: /images/projects/008_Zotero.png
+            title: "RNA Seq Introduction"
+            description: "Descr"
+            date: "2024-11-24"
+            categories: [R]
 ---
 
 ```{r}
 #| echo: false
 #| eval: false
+# template
 categories:
   R
 
@@ -109,4 +113,12 @@ template:
             description: "Description of project"
             date: "2024-11-15"
             categories: [R, Py]
+            
+            
+          - href: /006_relational_databases.qmd
+            thumbnail: /images/projects/006_relational_databases.png
+            title: "SQL, Relational Databases"
+            description: "Descr"
+            date: "2024-11-24"
+            categories: [R]
 ```

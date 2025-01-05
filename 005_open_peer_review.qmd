@@ -9,7 +9,17 @@ format:
       - text: Does retrieval potentiate new learning when retrieval stops but new learning continues?
         icon: file-earmark-text
         href: https://doi.org/10.1016/j.jml.2020.104150
+code-fold: true
 ---
+
+```{r}
+#| code-summary: "Library"
+#| message: false
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(fs)
+```
 
 ***Write an Rmarkdown report on your findings, including the table above and some information about the article such as general aim, short methods and results. If data is available, try including some***
 
@@ -47,7 +57,6 @@ It does not contain an actual data availability statement as mentioned before, h
 
 ```{r dir_tree}
 fs::dir_tree(here::here("data_raw/data_0050/osfstorage-archive/"))
-library(tidyverse) # REMOVE
 ```
 Files are clearly named and a readme.txt containing metadata file is included.
 

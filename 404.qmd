@@ -4,7 +4,7 @@ format:
   html
 ---
 
-Return to <a href="/index.qmd"> Index </a>
+Return to <a href="/index.qmd"> Home </a>
 
 ```{r}
 #| echo: false

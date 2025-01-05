@@ -1,9 +1,11 @@
 ---
-title: "Index"
+title: "Alex Groot"
+subtitle: "Student life sciences and data science"
 title-block-banner: true
+code-tools: false
 ---
 
-```{r}
-"Index page"
-1 + 1
-```
+Welcome to my personal website.
+I am a student life sciences majoring in molecular biology at the Hogeschool Utrecht and I have interests in biology, bioinformatics and also general data science. 
+
+I enjoy working with- and analyzing data and I like building stuff, check out my mostly R related [Projects](/projects.qmd) page for some things I've worked on. 

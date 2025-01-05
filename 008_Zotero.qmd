@@ -32,4 +32,3 @@ Over the past decade we have gone from detecting and identifying MPs in marine h
 In order to better understand the biological effect of MPs we aim to utilize long-read RNA-Seq analyses, facilitated by the Oxford Nanopore MinION, to explore the impact on human gene expression to analyze potential downstream health issues. By developing an automated data science workflow which makes use of minimap2, bambu and DESeq2 for discovery, quantification and differential gene expression we aim to provide a workflow that serves as a foundation for our research and a potential foundation for more reproducible data analyses in the future.
 
 
-the ~20 (μm) 

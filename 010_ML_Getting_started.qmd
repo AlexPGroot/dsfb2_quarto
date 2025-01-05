@@ -12,7 +12,7 @@ format:
       - text: Data set
         icon: database
         href: https://archive.ics.uci.edu/dataset/14/breast+cancer
-
+code-fold: true
 ---
 
 # Getting started with machine learning
@@ -34,6 +34,7 @@ Repeat for each separate fold and pick the best results.
 ### Load R packages {-}
 
 ```{r 010_ml_library, warnings=FALSE, message=FALSE}
+#| code-summary: "Library"
 library(here)
 library(tidyverse)
 library(tidymodels)

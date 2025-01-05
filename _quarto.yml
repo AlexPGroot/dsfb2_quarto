@@ -7,12 +7,27 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: about.qmd
-        text: About
       - href: projects.qmd
         text: Projects
   sidebar:
-    contents: /*
+      contents:
+        - text: Home
+          href: index.qmd
+        - projects.qmd
+        - 001_CV.qmd
+        - 002_Looking_ahead.qmd
+        - 003_Guerrilla_analytics_framework.qmd
+        - text: C elegans analysis
+          href: 004_C_elegans.qmd
+        - 005_open_peer_review.qmd
+        - text: R Package
+          href: https://github.com/AlexPGroot/mytoolkitr
+        - text: RNAseq introduction
+          href: 008_Zotero.qmd
+        - 009_Parameterized_report.qmd
+        - 010_ML_Getting_started.qmd
+        - text: Interactive R Shiny App Report
+          href: https://alexpgroot.shinyapps.io/dsfb2_deploy/
   site-url: https://alexpgroot.github.io/
   page-footer: 
     center: | 

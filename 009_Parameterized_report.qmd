@@ -292,5 +292,7 @@ Data table using set parameters:
 <br> Country: `r raw_data_0090$countryterritoryCode %>% unique()`
 <br> Year: `r raw_data_0090$year %>% unique()`
 <br> Period: `r raw_data_0090$month %>% unique()`
+<br>
+<br> This Parameterized report is available as interactive Shiny app hosted on: <a href="https://alexpgroot.shinyapps.io/dsfb2_deploy/" target="_blank"> shinyapps.io
 
 

@@ -2,11 +2,13 @@
 editor_options: 
   markdown: 
     wrap: 72
+code-fold: true
 ---
 
 # Relational databases
 
 ```{r relational_data_transfer, eval=FALSE}
+#| echo: false
 # https://lesmaterialen.rstudio.hu.nl/workflows-reader/relationaldb.html
 
 # https://robertochiosa.medium.com/import-export-r-packages-a6a122005e00
@@ -22,6 +24,8 @@ editor_options:
 ```
 
 ```{r relational_library}
+#| code-summary: "Library"
+#| message: false
 library(here)
 library(dslabs)
 library(tidyverse)

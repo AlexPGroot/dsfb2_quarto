@@ -1,39 +1,46 @@
 ---
-title: C elegans
+title: C. elegans analysis using different compounds
 execute:
   message: false
   warning: false
+code-fold: true
 ---
 
 ```{r elegans library}
-#| echo: false
+#| code-summary: "Library"
 library(here)
 library(readxl)
 library(tidyverse)
 library(ggplot2)
 library(scales)
 library(drc)
+library(gt)
 theme_set(theme_bw())
 ```
 
 ```{r elegans introduction}
+#| messages: false
+#| label: tbl-0040_1
+#| tbl-cap: head Overview of the loaded data.
 data_0040 <-
   readxl::read_excel(here("data_raw/data_0040/CE.LIQ.FLOW.062_Tidydata.xlsx"))
-data_0040
+data_0040 %>% head() %>% gt::gt()
 ```
 
 Column RawData has missing data in cells 192-196, or samples in vialNr 3, compName napthalene. These data points are NA in the data when loaded into R studio. Most compUnits use nM, Ethanol and S-medium use pct.
 
 ```{r data wrangling}
-# compConcentration doesn't show up on a graph properly because its values are of chr type
-# change type compConcentration to numeric
 data_0040_tidy <- data_0040
 data_0040_tidy$compConcentration <- 
   as.numeric(data_0040$compConcentration)
 ```
 
+Since `compConcentration` is of character type, the data does not get plotted properly and we change it to numeric.
 
 ```{r elegans ggplot}
+#| label: fig-0040_1
+#| fig-cap: Scatter plot showing the number of C. elegans offspring in response to incubation of adult nematods to varying concentrations of different compounds. Compounds are measured in nanomolar (nM), except for ethanol and S-medium (%).
+#| 
 # create ggplot, adding concentration to x-axis and measured data to y-axis
 # control/experiment are defined by shape, components are defined by colour
 data_0040_graph <- 
@@ -42,25 +49,30 @@ data_0040_graph <-
              y = RawData,
              shape = expType,
              colour = compName)) +
-  geom_point(position = position_jitter(w = 0.03, h = 0)) + # jiter is added for viewing benefits
+  geom_point(position = position_jitter(w = 0.03, h = 0)) + 
   scale_x_continuous(trans = log10_trans()) + # log10 scale is applied to make results more readable.
-  labs(title = "title",
-       subtitle = "subtitle")
+  labs(title = "Effect of compounds on C. elegans offspring") +
+  ylab("Offspring Count") +
+  xlab("Compound Concentration")
 print(data_0040_graph)
 ```
-\
-The positive control = Ethanol\
-The negative control = S-medium\
+<br>
+
+@fig-0040_1 shows a scatter plot of the C. elegans offspring data after the adults have been incubated in differing concentrations of the different compounds; 2,6-diisopropylnapthalene, decane, napthalene, the positive control ethanol and the negative control S-medium. As the differences in concentrations were quite large, we changed to a log10 scale to more clearly present the data. We also added a slight jitter to the data points to displace each point and make it easier to read, as a lack of jitter results in a straight vertical line of data points.
 
 ```{r elegans ggplot facet}
+#| label: fig-0040_2
+#| fig-cap: Scatter plot showing the number of C. elegans offspring in response to incubation of adult nematods to varying concentrations of different compounds. Compounds are measured in nanomolar (nM), except for ethanol and S-medium (%). The plots are now split into individual plots to better show each trend.
 # facet wrap to show individual graphs
 data_0040_graph +
   facet_wrap(vars(compName))
 ```
-\
-With the components split it is easier to see that there seems to be a downward trend in the offspring count once the concentration of the components increase.\
-
+<br>
+With the each component split into its own plot in @fig-0040_2 using `facet_wrap` it is easier to see the downward trend in the offspring count once the concentration of the components increases.
+<br>
 ```{r elegans ggplot normalized}
+#| label: fig-0040_3
+#| fig-cap: Scatter plot showing the number of C. elegans offspring in response to incubation of adult nematods to varying concentrations of different compounds. Compounds are measured in nanomolar (nM), except for ethanol and S-medium (%). The data is normalized and shows the effect of the compound on the offspring count compared to the negative control at the 1.0 baseline.
 # data is normalized for negative control by setting the mean of negative control to 1
 
 negative_control_mean <- data_0040_tidy %>%
@@ -77,9 +89,6 @@ data_0040_normalized <- data_0040_temp %>%
     NormalizedData = if_else(expType == "controlNegative", 1, RawData / negative_control_mean)
   )
 
-# print the normalized dataset
-print(data_0040_normalized)
-
 # print normalized dataset as ggplot
 data_0040_normalized_graph <-
   data_0040_normalized %>%
@@ -88,28 +97,67 @@ data_0040_normalized_graph <-
              shape = expType,
              colour = compName)) +
   geom_point(position = position_jitter(w = 0.03, h = 0)) +
-  scale_x_continuous(trans = log10_trans(),
-                     labels = label_log()) +
-  labs(title = "title",
-       subtitle = "subtitle")
-print(data_0040_normalized_graph)
-
-data_0040_normalized_graph <-
-  data_0040_normalized %>%
-  ggplot(aes(x = compConcentration,
-             y = NormalizedData,
-             shape = expType,
-             colour = compName)) +
-  geom_point(position = position_jitter(w = 0.03, h = 0)) +
   scale_x_log10() +
-  labs(title = "test",
-       subtitle = "subtitle")
+  labs(title = "Effect of compounds on C. elegans offspring",
+       subtitle = "Normalized data compared to negative control") +
+  xlab("Compound concentration") +
+  ylab("Normalized offspring count")
 print(data_0040_normalized_graph)
 
 ```
-\
-finish dose response with drc here
+
+As the nematodes grow differently due to variance we have different amounts of offspring per adult. In @fig-0040_3 the data has been normalized using the negative control as a baseline to show the impact of the compounds on the offspring count.
+
 ```{r elegans dose response}
+#| label: fig-0040_4
+#| fig-cap: "Dose response curves (DRC) of each experimental compound using offspring count data that has been normalized for the negative control and their calculated EC50s"
+#| fig-subcap:
+#|   - "2,6-diisopropylnaphthalene DRC showing a gradual decrease response by increasing the compound conentration. With a calculated EC50 of 0.03 (nM)"
+#|   - "decane DRC showing a steep decreased response after the concentration of 0.0499 (nM). With a calculated EC50 of 0.12 (nM)"
+#|   - "naphthalene DRC showing a steep decreased response around the concentration of 1.95 (nM). With a calculated EC50 of 3.13 (nM) "
+#| layout-ncol: 1
+
+data_0040_filter_exp <- data_0040_tidy %>% 
+  filter(expType == "experiment")
+
+# data_0040_filter_exp_naphthalene <-
+#   data_0040_filter_exp %>% 
+#   filter(compName == "naphthalene")
 # 
-data_0040_tidy %>% view
+# drm_nap <- 
+#   drm(data = data_0040_filter_exp_naphthalene,
+#     formula = RawData ~ compConcentration,
+#     fct = LL.4())
+# 
+# plot(drm_nap, main = "naphthalene")
+
+####
+
+exp_compname <- data_0040_filter_exp$compName %>% unique()
+
+for (i in exp_compname) {
+  drm_calc <- drm(data = data_0040_normalized %>% filter(compName == i),
+               formula = NormalizedData ~ compConcentration,
+               fct = LL.4())
+  
+  plot(drm_calc, 
+       main = i, 
+       ylab = "Normalized Offspring Count",
+       xlab = "Compound Concentration (nM)")
+
+  # calc EC50 using ED, extract [1] ec50 value
+  ec50 <- round(ED(drm_calc, 50)[1], digits = 2)
+  
+  # Add EC50 annotation to the plot
+  abline(h = 0.5, lty = 2) # line hor at 0.5 offsprint count, line ver at ec50, lty dashed lines
+  abline(v = ec50, lty = 2) 
+  text(x = ec50, 
+       y = 0.6,
+       labels = paste("EC50: ", ec50, "nM"),
+       pos = 2) # position left of point
+}
+
 ```
+
+Dose response curves (DRCs) have been plotted using the `drc` package using the normalized offspring data and the compound concentrations. Using de `ED` function we also calculate the EC50 values and add them to the plots. <br>In @fig-0040_4-1 we see 2,6-diisopropylnaphthalene has an EC50 of 0.03 (nM) and the normalized offsrping count gradually goes down when the compound concentration goes up. The EC50 however doesn't intersect with the graph properly as it should be more around the range of 0.49 (nM) following the line. <br>In @fig-0040_4-2 We see decane have an EC50 of 0.12 (nM). The graph shows a steep decrease in normalized offspring count after 0.0499 (nM). The calculated EC50 doesn't quite intersect at the 50% as the compound concentration seems to be higher on the graph with 0.12 (nM) reaching about 60%. <br>In @fig-0040_4-3 we see naphthalene with an EC50 of 3.13 (nM). The offspring count has a steep decrease after about 1.95 (nM) of compound.
+<br>
