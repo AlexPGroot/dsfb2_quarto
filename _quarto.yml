@@ -14,6 +14,9 @@ website:
         - text: Home
           href: index.qmd
         - projects.qmd
+        - text: CV_2
+          href: vitae/vitae.pdf
+          link-external-newwindow: true
         - 001_CV.qmd
         - 002_Looking_ahead.qmd
         - 003_Guerrilla_analytics_framework.qmd

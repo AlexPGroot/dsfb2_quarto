@@ -1,0 +1,66 @@
+---
+name: Alex
+surname: Groot
+position: "Student Life Sciences"
+# pronouns: she/her
+# address: "School of Physics & Chemistry, École Normale Supérieure"
+phone: +31 6 18 33 64 55
+www: alexpgroot.github.io
+email: "alex_groot@icloud.com"
+# twitter: mariecurie
+github: AlexPGroot
+# linkedin: mariecurie
+# date: "`r format(Sys.time(), '%B %Y')`"
+output:
+  vitae::awesomecv:
+    page_total: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+library(tibble)
+```
+
+# About Me
+
+Student HBO life sciences at Hogeschool Utrecht majoring in molecular biology, transitioning into the field of data science. Having experience in R programming and data science, I am eager to use my analytical skills and programming on biological data to gain data-driven insights into processes. I also enjoy working on projects that assist in facilitating the process of analytics and research.
+
+# Skills
+
+- R (programming language)
+- R Quarto
+- R Shiny
+- Data visualization (ggplot2/plotly)
+- Git
+- Bash
+- Linux
+- Microsoft Excel
+
+# Projects
+
+```{r}
+tribble(
+  ~ project, ~ subtitle, ~ skills,
+  ###
+  "Project Nanopore", 
+  "Processing and analyzing MinION RNA-sequencing data", 
+  c("FastQC", "minimap2", "Bambu", "DESeq","IGV browser"),
+  ###
+  "Getting started with machine learning",
+  "Personal project using breast cancer dataset",
+  c("Machine learning using R Tidymodels"),
+  ###
+  "Project genes and proteins",
+  "Transfecting eukaryote cells with recombinant plasmids",
+  c("SDS-PAGE", "Western-blot"),
+  ###
+  "Project sphingolipids",
+  "Cell culture and experimentation",
+  c("Working with multiple cell lines (SKNAS, HEK293T, HEPG2)", "Setting up and performing assays (MTT, Amplex Red)", "Thin Layer Chromatography (TLC)")
+) %>% detailed_entries(what = subtitle, 
+                       when = "", 
+                       with = project, 
+                       where = "", 
+                       why = skills)
+```
