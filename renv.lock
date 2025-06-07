@@ -20,23 +20,6 @@
       ],
       "Hash": "065ae649b05f1ff66bb0c793107508f5"
     },
-    "DT": {
-      "Package": "DT",
-      "Version": "0.33",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "crosstalk",
-        "htmltools",
-        "htmlwidgets",
-        "httpuv",
-        "jquerylib",
-        "jsonlite",
-        "magrittr",
-        "promises"
-      ],
-      "Hash": "64ff3427f559ce3f2597a4fe13255cb6"
-    },
     "Deriv": {
       "Package": "Deriv",
       "Version": "4.1.6",
@@ -2134,28 +2117,6 @@
       ],
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
     },
-    "rbbt": {
-      "Package": "rbbt",
-      "Version": "0.0.0.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "rbbt",
-      "RemoteUsername": "paleolimbot",
-      "RemoteSha": "212680cf89b22784bbbb9754d021c3196e85398f",
-      "Requirements": [
-        "R",
-        "clipr",
-        "fs",
-        "httr",
-        "knitr",
-        "readr",
-        "rmarkdown",
-        "rstudioapi",
-        "stringr"
-      ],
-      "Hash": "4bb2befd1f634cab159688d39ce6cb95"
-    },
     "reactR": {
       "Package": "reactR",
       "Version": "0.6.1",
@@ -2923,6 +2884,27 @@
         "R"
       ],
       "Hash": "c826c7c4241b6fc89ff55aaea3fa7491"
+    },
+    "vitae": {
+      "Package": "vitae",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "glue",
+        "jsonlite",
+        "knitr",
+        "pillar",
+        "rlang",
+        "rmarkdown",
+        "tibble",
+        "vctrs",
+        "xfun",
+        "yaml"
+      ],
+      "Hash": "3ffbc747d1700570515340cf82af83ac"
     },
     "vroom": {
       "Package": "vroom",
