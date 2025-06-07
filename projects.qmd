@@ -55,7 +55,8 @@ listing:
             thumbnail: /images/projects/rlogo.png
             title: "Looking Ahead"
 
-          - href: /001_CV.qmd
+          - href: /vitae/vitae.pdf
+            target: _blank
             thumbnail: /images/projects/rlogo.png
             title: "Curriculum Vitae"
 ---

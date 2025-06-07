@@ -14,10 +14,9 @@ website:
         - text: Home
           href: index.qmd
         - projects.qmd
-        - text: CV_2
+        - text: Curriculum Vitae
           href: vitae/vitae.pdf
           target: _blank
-        - 001_CV.qmd
         - 002_Looking_ahead.qmd
         - 003_Guerrilla_analytics_framework.qmd
         - text: C elegans analysis
