@@ -17,7 +17,6 @@ website:
         - text: Curriculum Vitae
           href: vitae/vitae.pdf
           target: _blank
-        - 002_Looking_ahead.qmd
         - 003_Guerrilla_analytics_framework.qmd
         - text: C elegans analysis
           href: 004_C_elegans.qmd
@@ -30,6 +29,8 @@ website:
         - 010_ML_Getting_started.qmd
         - text: Interactive R Shiny App Report
           href: https://alexpgroot.shinyapps.io/dsfb2_deploy/
+        - text: Project Nanopore
+          href: https://github.com/AlexPGroot/Project_Nanopore
   site-url: https://alexpgroot.github.io/
   page-footer: 
     center: | 
