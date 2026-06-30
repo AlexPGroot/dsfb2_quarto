@@ -1,16 +1,14 @@
 ---
 name: Alex
 surname: Groot
-position: "Student Life Sciences"
-# pronouns: she/her
-# address: "School of Physics & Chemistry, École Normale Supérieure"
+position: "Bachelor Life Sciences"
 phone: +31 6 18 33 64 55
 www: alexpgroot.github.io
 email: "alex_groot@icloud.com"
-# twitter: mariecurie
 github: AlexPGroot
-# linkedin: mariecurie
+linkedin: alex-groot-b10b7634b
 # date: "`r format(Sys.time(), '%B %Y')`"
+profilepic: "$HOME/Pictures/IMG_1306.JPEG"
 output:
   vitae::awesomecv:
     page_total: true
@@ -24,32 +22,79 @@ library(tibble)
 
 # About Me
 
-Student HBO life sciences at Hogeschool Utrecht majoring in molecular biology, transitioning into the field of data science. Having experience in R programming and data science, I am eager to use my analytical skills and programming on biological data to gain data-driven insights into processes. I also enjoy working on projects that assist in facilitating the process of analytics and research.
+Life Sciences graduate with a strong interest in bioinformatics, comparative genomics, and data science. During my graduation internship at Amsterdam UMC, Leptospirosis Reference Centre, I worked on pangenome analyses of 1440 _Leptospira_ genomes, investigating genetic variation and host adaptation using computational approaches. Skilled in R programming, data analysis, and scientific workflows, I enjoy applying quantitative methods to \newline biological questions and developing tools that support efficient and reproducible research.
+
+# Work experience and internships
+
+```{r}
+tribble(
+  ~ Skills, ~ Year, ~ Where, ~ Experience,
+  "Bioinformatics, Pangenome, Phylogeny, HPC, Virulence factors, Vaccine target screening", "2025-2026", "Amsterdam UMC, Leptospirosis Reference Centre", "Graduation internship",
+  "Plasmid/primer design, Biotechnology, CrisprCas", "2020-2021", "Leiden UMC", "Internship"
+) %>%
+  detailed_entries(Skills, Year, Where, Experience)
+```
+
+# Education
+
+```{r}
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "Bachelor of Science, Biologie en Medisch Laboratoriumonderzoek (Life Sciences)", "2018-2026", "Hogeschool Utrecht", "Utrecht, The Netherlands"
+) %>%
+  detailed_entries(Degree, Year, Institution, Where)
+```
 
 # Skills
 
-- R (programming language)
-- R Quarto
-- R Shiny
-- Data visualization (ggplot2/plotly)
-- Git
-- Bash
-- Linux
-- Microsoft Excel
+## Bioinformatics & Genomics
 
+* Comparative genomics and pangenomics
+* Phylogenetic analysis
+* Genome annotation and functional analysis
+* Long-read sequencing data analysis (Oxford Nanopore)
+* R (tidyverse, tidymodels)
+* Data visualization (ggplot2, plotly)
+* Machine learning (R Tidymodel)
+
+## General Tools
+
+* Linux server
+* Bash
+* Git
+* High Performance Computing (HPC)
+* LaTeX
+
+## Laboratory Techniques
+
+* Cell culture
+* Recombinant DNA techniques
+* SDS-PAGE
+* Western blotting
+* Thin Layer Chromatography (TLC)
+* MTT and Amplex Red assays
+
+\newpage
 # Projects
 
 ```{r}
 tribble(
   ~ project, ~ subtitle, ~ skills,
   ###
+  "Pangenome investigation of Leptospira genus and insight into the epidemiology of Leptospirosis",
+  "One year graduation internship at Amsterdam UMC Leptospirosis reference centre",
+  c(
+  "Pangenome analysis (PPanGGOLiN)",
+  "Genome-wide association studies (Scoary)",
+  "Phylogenetic analysis (IQ-TREE)",
+  "Functional annotation (COG categories)",
+  "High Performance Computing (HPC)",
+  "Data visualization and statistical analysis"
+),
+  ###
   "Project Nanopore", 
   "Processing and analyzing MinION RNA-sequencing data", 
   c("FastQC", "minimap2", "Bambu", "DESeq","IGV browser"),
-  ###
-  "Getting started with machine learning",
-  "Personal project using breast cancer dataset",
-  c("Machine learning using R Tidymodels"),
   ###
   "Project genes and proteins",
   "Transfecting eukaryote cells with recombinant plasmids",
